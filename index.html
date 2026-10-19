@@ -10,7 +10,7 @@
     *{box-sizing:border-box} body{margin:0;padding:28px 16px 52px}main{max-width:780px;margin:auto}
     h1{font-size:clamp(26px,5vw,40px);letter-spacing:-.045em;margin:10px 0}h2{font-size:18px;margin:0 0 6px}p{line-height:1.5}
     .sub{color:#636b73;margin:0 0 24px}.eyebrow{font-size:12px;letter-spacing:.12em;font-weight:700;color:#666e77;text-transform:uppercase}
-    .notice{padding:15px 17px;border:1px solid #d9e0e7;background:#fff;border-radius:14px;color:#464e57;margin:20px 0}
+    .photo-rule{padding:17px 19px;margin:18px 0;border:2px solid #18765d;background:#e9f8f1;border-radius:14px;color:#165c49;line-height:1.5}.photo-rule strong{display:block;font-size:18px;margin-bottom:4px}.full-length{display:inline-block;font-weight:800;color:#146b51;background:#e7f6ee;border-radius:6px;padding:2px 6px}.notice{padding:15px 17px;border:1px solid #d9e0e7;background:#fff;border-radius:14px;color:#464e57;margin:20px 0}
     .card{background:#fff;border:1px solid #e5e7eb;border-radius:17px;padding:19px;margin:14px 0}
     .card-head{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}.hint{font-size:13px;color:#68707a;margin:4px 0 15px}
     input[type=file]{width:100%;padding:13px;border:1px dashed #a7b0ba;border-radius:12px;background:#fafafa;font:inherit;cursor:pointer}
@@ -25,13 +25,14 @@
 </head>
 <body>
 <main>
-  <div class="eyebrow">Прототип · шаг 2</div>
+  <div class="eyebrow">Прототип · шаг 2.1</div>
   <h1>Проверка фотографий осанки</h1>
-  <p class="sub">Загрузи три снимка. Бесплатная технология MediaPipe попробует найти ориентиры тела и проверить, видно ли человека достаточно полно. Это ещё не анализ осанки.</p>
+  <p class="sub">Загрузи три фотографии: сбоку, спереди и сзади. На каждой должен быть виден человек целиком. MediaPipe проверит, удалось ли распознать ориентиры тела. Это ещё не анализ осанки.</p>
+  <div class="photo-rule"><strong>ВАЖНО: все 3 фото только В ПОЛНЫЙ РОСТ!</strong>Человек должен быть виден целиком: <b>от макушки головы до обеих стоп</b>. Не обрезай голову, ноги и стопы. Оставь немного свободного места сверху и снизу. <b>Фотографии по пояс НЕ подходят.</b></div>
   <div class="notice"><strong>Конфиденциальность:</strong> выбранные фотографии обрабатываются локально в браузере. Программа не загружает их в GitHub и не отправляет на наш сервер. Для работы требуется интернет: код MediaPipe и модель загружаются с внешних технических серверов. Используй только снимки, на обработку которых есть согласие.</div>
   <section class="card" data-kind="side">
     <div class="card-head"><h2>1. Вид сбоку</h2><span aria-hidden="true">↔</span></div>
-    <p class="hint">В полный рост, строго боком к камере, камера примерно на уровне талии, руки вдоль корпуса. Не втягивай живот.</p>
+    <p class="hint"><span class="full-length">ОБЯЗАТЕЛЬНО: В ПОЛНЫЙ РОСТ, ОТ ГОЛОВЫ ДО СТОП.</span> Строго боком к камере, камера примерно на уровне талии, руки вдоль корпуса. Не втягивай живот.</p>
     <input id="side" type="file" accept="image/jpeg,image/png,image/webp" aria-label="Фотография сбоку" />
     <img class="preview" alt="Предпросмотр фотографии сбоку" />
     <canvas aria-label="Снимок сбоку с найденными ориентирами тела"></canvas>
@@ -39,7 +40,7 @@
   </section>
   <section class="card" data-kind="front">
     <div class="card-head"><h2>2. Вид спереди</h2><span aria-hidden="true">↑</span></div>
-    <p class="hint">В полный рост, лицом к камере, руки свободно опущены, тело не повёрнуто.</p>
+    <p class="hint"><span class="full-length">ОБЯЗАТЕЛЬНО: В ПОЛНЫЙ РОСТ, ОТ ГОЛОВЫ ДО СТОП.</span> Лицом к камере, руки свободно опущены, тело не повёрнуто.</p>
     <input id="front" type="file" accept="image/jpeg,image/png,image/webp" aria-label="Фотография спереди" />
     <img class="preview" alt="Предпросмотр фотографии спереди" />
     <canvas aria-label="Снимок спереди с найденными ориентирами тела"></canvas>
@@ -47,14 +48,14 @@
   </section>
   <section class="card" data-kind="back">
     <div class="card-head"><h2>3. Вид сзади</h2><span aria-hidden="true">↓</span></div>
-    <p class="hint">В полный рост, спиной к камере, руки вдоль корпуса. Лучше однотонная облегающая одежда.</p>
+    <p class="hint"><span class="full-length">ОБЯЗАТЕЛЬНО: В ПОЛНЫЙ РОСТ, ОТ ГОЛОВЫ ДО СТОП.</span> Спиной к камере, руки вдоль корпуса. Лучше однотонная облегающая одежда.</p>
     <input id="back" type="file" accept="image/jpeg,image/png,image/webp" aria-label="Фотография сзади" />
     <img class="preview" alt="Предпросмотр фотографии сзади" />
     <canvas aria-label="Снимок сзади с найденными ориентирами тела"></canvas>
     <div class="status" aria-live="polite">Фото ещё не выбрано</div>
   </section>
-  <label class="confirm"><input type="checkbox" id="views" /> <span>Я проверил(а), что фотографии соответствуют указанным ракурсам. MediaPipe пока не умеет надёжно отличать снимок спереди от снимка сзади.</span></label>
-  <button type="button" id="check" disabled>Проверить три фотографии с MediaPipe</button>
+  <label class="confirm"><input type="checkbox" id="views" /> <span>Я проверил(а), что <b>на всех трёх фотографиях человек виден в полный рост, от головы до стоп</b>, и что ракурсы соответствуют подписям. MediaPipe пока не умеет надёжно отличать снимок спереди от снимка сзади.</span></label>
+  <button type="button" id="check" disabled>Проверить 3 фото в полный рост</button>
   <div id="result" role="status" aria-live="polite"></div>
   <p class="small">Ограничение: модель находит ориентиры тела, но не видит поясничные позвонки и не ставит диагноз «гиперлордоз». Отклонение или недостаточная видимость точек не означает заболевание. Первый запуск может занять время из-за загрузки модели.</p>
 </main>
@@ -88,7 +89,7 @@
         if(urls.get(id)!==url)return;
         if(Math.min(test.naturalWidth,test.naturalHeight)<600){status(id,"Слишком маленькое изображение: нужно минимум 600 пикселей по короткой стороне","bad");return;}
         preview.src=url;preview.style.display="block";files.set(id,file);
-        status(id,"✓ Файл загружен. Проверка ориентиров тела начнётся по кнопке.","ok");updateButton();
+        status(id,"✓ Файл загружен. Убедись, что на снимке видны голова и обе стопы. Проверка точек начнётся по кнопке.","ok");updateButton();
       };
       test.onerror=()=>status(id,"Не удалось прочитать фотографию","bad");
       test.src=url;
@@ -161,10 +162,10 @@
         if(poses.length===0){drawOverlay(id,canvas,null);status(id,"✕ Человек не распознан. Нужен снимок в полный рост, без перекрытий.","bad");report.push(`«${names[id]}»: человек не найден.`);continue;}
         if(poses.length>1){drawOverlay(id,canvas,poses[0]);status(id,"✕ Найдено несколько людей. Нужен один человек в кадре.","bad");report.push(`«${names[id]}»: несколько людей в кадре.`);continue;}
         drawOverlay(id,canvas,poses[0]);const missing=checkLandmarks(poses[0]);
-        const problems=[];if(missing.length)problems.push(`Не видны достаточно уверенно: ${missing.join(", ")}.`);
+        const problems=[];if(missing.length)problems.push(`Не видны достаточно уверенно: ${missing.join(", ")}. Нужен снимок в полный рост, от головы до стоп.`);
         if(lighting)problems.push(lighting);
         if(problems.length){status(id,"⚠ "+problems.join(" ")+" Попробуй переснять.","warn");report.push(`«${names[id]}»: требуется улучшение фото.`);}
-        else{status(id,"✓ Основные ориентиры найдены. Зелёные точки показывают работу модели.","ok");report.push(`«${names[id]}»: основные ориентиры найдены.`);}
+        else{status(id,"✓ Основные ориентиры найдены. Проверь, что на фото видны голова и стопы. Зелёные точки показывают работу модели.","ok");report.push(`«${names[id]}»: основные ориентиры найдены.`);}
       }
       resultBox.replaceChildren();add("h2","Результат проверки фото",resultBox);
       const ul=document.createElement("ul");for(const line of report)add("li",line,ul);resultBox.append(ul);
