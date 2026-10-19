@@ -37,13 +37,28 @@
     .summary-card h3{font-size:18px;margin:0 0 9px}.summary-card p{line-height:1.5;margin:8px 0;font-size:14px}
     .urgent{border-color:#d4a4a4;background:#fff5f5}
     .quiz-progress{font-size:13px;color:#58636e;margin:8px 0 0}
+    .medical-banner{background:#fff9ed;border:1px solid #e4c890;padding:17px 19px;border-radius:14px;margin:16px 0;line-height:1.55;color:#55411b}
+    .medical-banner strong{display:block;font-size:17px;margin-bottom:4px}
+    .report-block{margin:19px 0 0;padding:17px 19px;border-radius:14px;border:1px solid #e0e5eb;background:#fff}
+    .report-block h3{font-size:20px;margin:0 0 10px;letter-spacing:-.02em}
+    .report-block h4{margin:14px 0 5px;font-size:15px}
+    .report-block p{font-size:15px;line-height:1.68;margin:9px 0}
+    .report-block ul{font-size:15px;line-height:1.65;padding-left:22px}
+    .report-safe{background:#fff8f5;border-color:#eac2b5}
+    .report-course{background:#f0f8f4;border-color:#bcdccc}
+    .report-course a{color:#075d45;text-decoration:underline;font-weight:700}
+    .report-note{font-size:13px!important;color:#606c77}
+    .questionnaire input[type=text]{width:100%;padding:11px;border:1px solid #cbd5df;border-radius:9px;margin:10px 0 0;font:inherit}
+    .questionnaire .choice-note{font-size:13px;color:#536270;margin:8px 0 0}
+    
   </style>
 </head>
 <body>
 <main>
-  <div class="eyebrow">Прототип · шаг 4</div>
+  <div class="eyebrow">Прототип · шаг 5</div>
   <h1>Проверка фотографий осанки</h1>
-  <p class="sub">Загрузи три фотографии: сбоку, спереди и сзади. На каждой должен быть виден человек целиком. MediaPipe проверит, удалось ли распознать ориентиры тела. После проверки снимков ответь на 6 коротких вопросов. Страница покажет пробные геометрические наблюдения и соберёт <b>персональную карту самонаблюдений</b>. Это не диагностика.</p>
+  <p class="sub">Загрузи три фотографии: сбоку, спереди и сзади. На каждой должен быть виден человек целиком. MediaPipe проверит, удалось ли распознать ориентиры тела. Затем ответь на 7 коротких вопросов. Мы сопоставим наблюдения по фото с твоими ответами и подготовим подробный персональный информационный разбор. Это не диагностика.</p>
+  <div class="medical-banner"><strong>Важная информация о здоровье.</strong> Этот сервис — учебный инструмент самонаблюдения, а не медицинская или профессиональная диагностика. По фото нельзя поставить диагноз «гиперлордоз», выявить причину боли или определить необходимость лечения. Информация носит исключительно ознакомительный характер. Обсуди жалобы и подходящую физическую нагрузку с врачом или профильным специалистом; при тревожных симптомах не откладывай обращение за помощью.</div>
   <div class="photo-rule"><strong>ВАЖНО: все 3 фото только В ПОЛНЫЙ РОСТ!</strong>Человек должен быть виден целиком: <b>от макушки головы до обеих стоп</b>. Не обрезай голову, ноги и стопы. Оставь немного свободного места сверху и снизу. <b>Фотографии по пояс НЕ подходят.</b></div>
   <div class="notice"><strong>Конфиденциальность:</strong> выбранные фотографии обрабатываются локально в браузере. Программа не загружает их в GitHub и не отправляет на наш сервер. Для работы требуется интернет: код MediaPipe и модель загружаются с внешних технических серверов. Используй только снимки, на обработку которых есть согласие.</div>
   <section class="card" data-kind="side">
@@ -71,14 +86,18 @@
     <div class="status" aria-live="polite">Фото ещё не выбрано</div>
   </section>
   <section class="questionnaire" id="questions">
-    <h2>Короткая анкета: 6 вопросов</h2>
-    <p class="subq">Поможет связать твои собственные наблюдения со снимками. Ответы обрабатываются только в браузере. По ним нельзя установить гиперлордоз.</p>
+    <h2>Короткая анкета: 7 вопросов</h2>
+    <p class="subq">Отметь, что именно беспокоит, можно выбрать несколько вариантов. Ответы обрабатываются в браузере. Это не медицинский опросник и он не устанавливает гиперлордоз.</p>
     <form id="survey">
-      <fieldset><legend>1. Что тебя интересует в первую очередь?</legend><div class="choices">
-        <label><input type="radio" name="goal" value="abdomen" required> Форма живота</label>
-        <label><input type="radio" name="goal" value="lumbar"> Поясница и прогиб</label>
-        <label><input type="radio" name="goal" value="posture"> Осанка в целом</label>
-      </div></fieldset>
+      <fieldset><legend>1. Что привело тебя на эту проверку? Можно выбрать несколько.</legend><div class="choices">
+        <label><input type="checkbox" name="concern" value="abdomen"> Живот выступает вперёд</label>
+        <label><input type="checkbox" name="concern" value="pain"> Боль или дискомфорт в пояснице</label>
+        <label><input type="checkbox" name="concern" value="curve"> Кажется, что сильный прогиб в пояснице</label>
+        <label><input type="checkbox" name="concern" value="upper"> Шея, плечи, сутулость</label>
+        <label><input type="checkbox" name="concern" value="general"> Хочу лучше понять свою осанку</label>
+        <label><input type="checkbox" name="concern" value="other"> Другое</label>
+      </div><p class="choice-note">Пожалуйста, отметь хотя бы один вариант.</p>
+      <input id="otherConcern" type="text" maxlength="160" placeholder="Если выбрано «Другое», напиши в двух словах (необязательно)" aria-label="Другой запрос" /></fieldset>
       <fieldset><legend>2. Говорил ли врач или профильный специалист, что у тебя гиперлордоз?</legend><div class="choices">
         <label><input type="radio" name="diagnosed" value="yes" required> Да</label>
         <label><input type="radio" name="diagnosed" value="no"> Нет</label>
@@ -104,8 +123,13 @@
         <label><input type="radio" name="redflags" value="no"> Нет</label>
         <label><input type="radio" name="redflags" value="unsure"> Не уверена / не уверен</label>
       </div></fieldset>
+      <fieldset><legend>7. Замечаешь ли ты, что живот выступает вперёд в обычной расслабленной стойке?</legend><div class="choices">
+        <label><input type="radio" name="abdomenAppearance" value="yes" required> Да</label>
+        <label><input type="radio" name="abdomenAppearance" value="no"> Нет</label>
+        <label><input type="radio" name="abdomenAppearance" value="unsure"> Не уверена / не уверен</label>
+      </div></fieldset>
     </form>
-    <p class="quiz-progress" id="surveyProgress">Ответов: 0 из 6.</p>
+    <p class="quiz-progress" id="surveyProgress">Ответов: 0 из 7.</p>
   </section>
   <label class="confirm"><input type="checkbox" id="views" /> <span>Я проверил(а), что <b>на всех трёх фотографиях человек виден в полный рост, от головы до стоп</b>, и что ракурсы соответствуют подписям. MediaPipe пока не умеет надёжно отличать снимок спереди от снимка сзади.</span></label>
   <button type="button" id="check" disabled>Проверить фото и составить карту наблюдений</button>
@@ -118,9 +142,15 @@
   const MAX_SIZE=12*1024*1024;
   const button=document.getElementById("check"), resultBox=document.getElementById("result"), views=document.getElementById("views");
   const survey=document.getElementById("survey"),surveyProgress=document.getElementById("surveyProgress");
-  const surveyFields=["goal","diagnosed","curve","pain","bloating","redflags"];
-  const readAnswers=()=>Object.fromEntries(surveyFields.map(k=>[k,survey.querySelector(`input[name="${k}"]:checked`)?.value??null]));
-  survey.addEventListener("change",()=>{const answers=readAnswers();surveyProgress.textContent=`Ответов: ${Object.values(answers).filter(Boolean).length} из 6.`;clearResult();updateButton();});
+  const surveyFields=["diagnosed","curve","pain","bloating","redflags","abdomenAppearance"];
+  const readAnswers=()=>({
+    ...Object.fromEntries(surveyFields.map(k=>[k,survey.querySelector(`input[name="${k}"]:checked`)?.value??null])),
+    concerns:Array.from(survey.querySelectorAll('input[name="concern"]:checked')).map(el=>el.value),
+    other:survey.querySelector('#otherConcern')?.value?.trim()||""
+  });
+  function updateSurveyProgress(){const a=readAnswers();surveyProgress.textContent=`Ответов: ${surveyFields.filter(k=>a[k]).length+(a.concerns.length>0?1:0)} из 7.`;clearResult();updateButton();}
+  survey.addEventListener("change",updateSurveyProgress);
+  survey.addEventListener("input",(e)=>{if(e.target.id==="otherConcern")updateSurveyProgress();});
   const allowedTypes=new Set(["image/jpeg","image/png","image/webp"]);
   const names={side:"Сбоку",front:"Спереди",back:"Сзади"};
   let landmarker=null;
@@ -128,7 +158,7 @@
     const el=document.querySelector(`[data-kind="${id}"] .status`);
     el.textContent=message;el.className="status"+(type?" "+type:"");
   }
-  function updateButton(){button.disabled=!views.checked||!slots.every(id=>files.has(id))||!Object.values(readAnswers()).every(Boolean);}
+  function updateButton(){const a=readAnswers();button.disabled=!views.checked||!slots.every(id=>files.has(id))||!surveyFields.every(k=>Boolean(a[k]))||a.concerns.length===0;}
   function clearResult(){resultBox.style.display="none";resultBox.replaceChildren();}
   views.addEventListener("change",updateButton);
   slots.forEach(id=>{
@@ -243,32 +273,95 @@
     }
     return rows;
   }
-  function renderSurveySummary(parent){
+  const concernLabels={abdomen:"выпирающий живот",pain:"боль или дискомфорт в пояснице",curve:"выраженность поясничного прогиба",upper:"шея, плечи или сутулость",general:"общее состояние осанки",other:"другой запрос"};
+  function reportSection(parent,title,cls=""){
+    const s=document.createElement("section");s.className="report-block"+(cls?" "+cls:"");
+    add("h3",title,s);parent.append(s);return s;
+  }
+  function paragraph(s,text){return add("p",text,s);}
+  function reportList(s,items){const ul=document.createElement("ul");items.forEach(item=>add("li",item,ul));s.append(ul);}
+  function renderSurveySummary(parent,photoMetrics,photoOk){
     const a=readAnswers();
-    const wrap=document.createElement("section");wrap.className="summary-card";
-    add("h3","Твоя персональная карта самонаблюдений",wrap);
-    const goal={abdomen:"форма живота",lumbar:"поясница и прогиб",posture:"осанка в целом"}[a.goal];
-    add("p",`Главный запрос: ${goal}.`,wrap);
-    if(a.diagnosed==="yes") add("p","Ты сообщаешь, что специалист ранее отмечал гиперлордоз. Онлайн-самопроверка не подтверждает и не опровергает эту оценку.",wrap);
-    else if(a.diagnosed==="no") add("p","Ты не сообщаешь о ранее установленном гиперлордозе. По фотографиям его наличие определить нельзя.",wrap);
-    else add("p","Ранее установленный диагноз не указан. По фотографиям установить гиперлордоз нельзя.",wrap);
-    if(a.curve==="yes") add("p","Ты замечаешь выраженный прогиб поясницы. Это субъективное наблюдение, которое нельзя подтвердить текущими измерениями.",wrap);
-    else if(a.curve==="no") add("p","Ты не отмечаешь выраженного поясничного прогиба. Это само по себе не исключает никаких состояний.",wrap);
-    if(a.bloating==="yes") add("p","Ты отмечаешь изменение живота в течение дня. На внешний вид могут влиять пищеварение и другие факторы, не только осанка.",wrap);
-    if(a.pain==="sometimes") add("p","Ты отмечаешь периодический дискомфорт в пояснице. Если он сохраняется, усиливается или ограничивает движения, обратись к профильному специалисту.",wrap);
-    if(a.redflags==="yes"||a.redflags==="unsure"){
-      wrap.classList.add("urgent");
-      add("p","Важно: ты отметила/отметил возможные тревожные симптомы или сомнения в них. Не используй этот тест для выбора упражнений. При новой слабости ног, нарушении контроля мочеиспускания/стула или онемении в области промежности нужна срочная медицинская помощь; при других тревожных симптомах — своевременная очная оценка.",wrap);
-    } else if(a.pain==="often"){
-      wrap.classList.add("urgent");
-      add("p","Ты сообщаешь о частой или сильной боли. Прежде чем выбирать тренировочную программу, обратись к врачу или профильному специалисту.",wrap);
-    } else if(a.goal==="abdomen"||a.goal==="lumbar"){
-      add("p","Если цель — исследовать движение таза и поясницы и постепенно работать над привычками осанки, программа «Panza Hacia Adentro: Espalda Sin Dolor» может быть тематически подходящей. Она не заменяет диагностику и не гарантирует изменение формы живота.",wrap);
-    } else {
-      add("p","Если цель — общая работа с осанкой, плечами и шеей, тематически ближе «Espalda Sana y Cuello Sin Dolor». Это не медицинская рекомендация по итогам теста.",wrap);
+    const concerns=a.concerns;
+    const danger=a.redflags!=="no";
+    const highPain=a.pain==="often";
+    const hasAbdomen=concerns.includes("abdomen")||a.abdomenAppearance==="yes";
+    const hasLumbar=concerns.includes("curve")||a.curve==="yes"||a.diagnosed==="yes";
+    const hasBackPain=concerns.includes("pain")||a.pain!=="none";
+    const noLumbarConcern=!hasAbdomen&&!hasLumbar&&!hasBackPain;
+
+    const intro=reportSection(parent,"Персональный обзор: что мы узнали");
+    const userConcerns=concerns.map(x=>x==="other"&&a.other?`другое: ${a.other}`:concernLabels[x]||x);
+    paragraph(intro,`Ты обратилась/обратился на проверку по следующим причинам: ${userConcerns.join(", ")}. Мы сопоставляем это с твоими ответами и измеряемыми особенностями на фотографиях. Важно различать факт твоих ощущений и то, что действительно можно увидеть на снимке.`);
+    if(a.diagnosed==="yes")paragraph(intro,"По твоим словам, специалист раньше сообщал о гиперлордозе. Мы учитываем это как информацию с твоих слов, но онлайн-система не подтверждает и не опровергает заключение специалиста.");
+    else paragraph(intro,"Подтверждённое специалистом заключение о гиперлордозе в ответах не указано. По трём обычным фотографиям установить его нельзя.");
+    if(a.curve==="yes")paragraph(intro,"Ты сама/сам замечаешь выраженный поясничный прогиб. Это важное наблюдение для разговора со специалистом, но оно ещё не означает, что прогиб чрезмерен.");
+    if(a.curve==="no")paragraph(intro,"Ты не отмечаешь выраженного поясничного прогиба. Это не доказывает, что в пояснице нет никаких особенностей.");
+    if(a.bloating==="yes")paragraph(intro,"Ты сообщаешь, что живот меняется в течение дня. Это важная деталь: на его форму могут влиять пищеварение, вздутие и другие факторы, помимо положения корпуса.");
+
+    const geometry=reportSection(parent,"Что действительно видно на фотографиях");
+    if(!photoOk){paragraph(geometry,"Хотя бы один снимок не прошёл проверку качества. Поэтому геометрические наблюдения неполны. Для корректного сравнения лучше переснять отмеченные фотографии.");}
+    else paragraph(geometry,"Алгоритм смог найти основные ориентиры тела на трёх фотографиях. Ниже мы описываем геометрию точек в плоскости кадра, а не положение позвонков или медицинские отклонения.");
+    const g=[];
+    const side=photoMetrics.side;
+    if(side&&typeof side.earShoulder==="number"){
+      g.push(`Сбоку: расстояние между проекциями уха и плеча составляет примерно ${side.earShoulder}% измеренной высоты корпуса на снимке. Это показывает взаимное расположение ориентиров в кадре, но не диагностирует положение головы или шеи.`);
+      g.push(`Сбоку: расстояние между проекциями плеча и тазобедренной области составляет около ${side.shoulderHip}% той же высоты. Это не является измерением наклона таза или глубины поясничного прогиба.`);
+    }else g.push("Сбоку: точности видимых ориентиров оказалось недостаточно для повторяемых числовых измерений.");
+    for(const id of ["front","back"]){
+      const label=id==="front"?"Спереди":"Сзади";
+      if(typeof photoMetrics[id]==="number")g.push(`${label}: распознанная линия плеч отличается от горизонтали изображения примерно на ${photoMetrics[id]}°. На результат может влиять наклон телефона, положение тела или ошибка определения точек.`);
+      else g.push(`${label}: наклон линии плеч не удалось надёжно вычислить.`);
     }
-    add("p","Что даёт эта карта: структурированное описание твоих ответов и измерений на фото. Она не определяет угол поясничного лордоза, диагноз или единственную причину внешнего вида живота.",wrap).className="disclaimer";
-    parent.append(wrap);
+    reportList(geometry,g);
+    paragraph(geometry,"Особенно важно для твоего вопроса: MediaPipe не определяет поясничные позвонки, угол поясничного лордоза и истинный наклон таза. На боковой фотографии виден внешний силуэт, но на него влияют телосложение, одежда, положение тела и ракурс. Поэтому по фото мы не можем подтвердить или исключить гиперлордоз.").className="report-note";
+
+    const meaning=reportSection(parent,"Как понимать результат применительно к твоему запросу");
+    if(hasAbdomen){
+      paragraph(meaning,"Ты интересуешься выступающим животом или отмечаешь его в обычной стойке. Положение таза и корпуса действительно может менять внешний силуэт, однако само по себе это не показывает причину выпуклости живота. Осанка, распределение тканей, вздутие и индивидуальные особенности могут действовать одновременно.");
+      if(a.bloating==="yes")paragraph(meaning,"Поскольку ты отмечаешь изменения живота в течение дня, было бы неправильно объяснять его внешний вид только поясничным прогибом. При выраженном или сохраняющемся вздутии стоит обсудить пищеварительные жалобы с медицинским специалистом.");
+    }
+    if(hasLumbar){
+      paragraph(meaning,"В твоих ответах есть интерес к поясничному прогибу или указание на него. Небольшой поясничный изгиб естественен для позвоночника. Сам по себе заметный прогиб не обязательно является заболеванием, а оценить, чрезмерен ли он, по этой проверке невозможно.");
+    }
+    if(hasBackPain){
+      if(a.pain==="none")paragraph(meaning,"Ты выбрала/выбрал дискомфорт в пояснице как повод обращения, но в ответе о текущей боли указала/указал её отсутствие. Это может означать, что проблема бывает периодически или важна для тебя профилактически.");
+      else if(a.pain==="sometimes")paragraph(meaning,"Ты сообщаешь о периодическом дискомфорте в пояснице. Боль имеет разные причины, и даже заметный поясничный прогиб не доказывает, что причина именно в нём. Если симптомы повторяются, усиливаются или ограничивают повседневную жизнь, имеет смысл обратиться к врачу или физиотерапевту.");
+      else paragraph(meaning,"Ты сообщаешь о частой или сильной боли. Её не следует автоматически приписывать гиперлордозу. Здесь важнее профессионально разобраться в причинах боли, чем начинать новую программу по результатам фотографий.");
+    }
+    if(noLumbarConcern){
+      paragraph(meaning,"В твоих ответах нет отдельного запроса на поясницу или форму живота. Это нормально: наша проверка не обязана находить проблему. Если тебя интересует общая осанка или движение, можно начать с обсуждения индивидуальных целей и удобной повседневной активности, не присваивая себе диагноз.");
+    }
+
+    const next=reportSection(parent,"Что обычно помогает выстроить работу с осанкой");
+    paragraph(next,"Для комфортной работы с движениями корпуса обычно используют не одно «волшебное» упражнение, а сочетание нескольких направлений. Их подбор зависит от самочувствия и рекомендаций специалиста:");
+    reportList(next,[
+      "мягкие упражнения на подвижность тазобедренных суставов, таза и поясничной области в комфортной амплитуде;",
+      "постепенное развитие контроля корпуса и устойчивости мышц туловища;",
+      "подходящую по уровню подготовленности нагрузку на мышцы ягодиц и ног;",
+      "осознанную работу с движением, дыханием и повседневными привычками без стремления постоянно держать «идеальную» позу."
+    ]);
+    paragraph(next,"Это общие направления физической активности, а не персональный комплекс упражнений и не перечень подтверждённых упражнений внутри курса Ирины. Выбор программы зависит прежде всего от состояния здоровья и переносимости нагрузки.").className="report-note";
+
+    if(danger){
+      const s=reportSection(parent,"Важнее всего сейчас — обратиться за медицинской помощью","report-safe");
+      paragraph(s,"Ты отметила/отметил тревожные симптомы или не уверена/не уверен, что их нет. По этому онлайн-тесту нельзя решать, безопасно ли начинать упражнения. Если появились нарушения контроля мочеиспускания или стула, онемение промежности, новая выраженная слабость ног — нужна срочная медицинская помощь. При сильной боли после травмы также требуется срочная оценка. Если ты просто не понимаешь формулировку вопроса, лучше уточнить её у медицинского специалиста.");
+      paragraph(s,"Мы сознательно не рекомендуем покупать или начинать тренировочную программу по результатам этой проверки, пока ситуация не прояснена.");
+    }else if(highPain){
+      const s=reportSection(parent,"Сначала разберись с частой или сильной болью","report-safe");
+      paragraph(s,"С учётом твоего ответа о частой или сильной боли важно обратиться к врачу или профильному специалисту и подобрать безопасную нагрузку. Не стоит считать, что упражнения «исправят прогиб» и поэтому устранят боль: такой связи эта самопроверка не установила.");
+      paragraph(s,"После профессиональной оценки, если нагрузка разрешена, можно рассмотреть подходящую программу регулярных занятий.");
+    }else{
+      const course=reportSection(parent,"Следующий шаг: система Panza Hacia Adentro","report-course");
+      paragraph(course,"Если ты хочешь последовательно уделять внимание движению таза, поясницы и контролю корпуса, можно рассмотреть программу Ирины «Panza Hacia Adentro: Espalda Sin Dolor».");
+      paragraph(course,"Это рассчитанная на 4 недели система: две базовые практики по 15 минут чередуются пять дней в неделю, ещё два дня отведены на отдых. После завершения месяца к практике можно возвращаться, если она тебе подходит и выполняется без боли.");
+      paragraph(course,"Программа создана Ириной как понятный способ организовать регулярные занятия. Она не заменяет обследование, не гарантирует выпрямления поясничного отдела, устранения боли или изменения формы живота. Если упражнения вызывают боль, следует остановиться и получить профессиональную оценку.");
+      const link=add("a","Посмотреть программу и её содержание",course);link.href="https://espalda.online/pages/programas";link.target="_blank";link.rel="noopener noreferrer";
+      if(noLumbarConcern)paragraph(course,"Если главная цель — шея, плечи и общая осанка, можно также посмотреть «Espalda Sana y Cuello Sin Dolor», чтобы выбрать программу по своему запросу.");
+    }
+    const disclaimer=reportSection(parent,"Медицинское предупреждение");
+    paragraph(disclaimer,"Эта онлайн-проверка — информационный инструмент самонаблюдения, а не профессиональная медицинская программа, консультация, обследование или постановка диагноза. Ни фотографии, ни анкета, ни расчёты MediaPipe не подтверждают гиперлордоз и не объясняют причину боли. Результаты могут быть неточными. Даже если на фото не найдено особенностей, это не означает отсутствия заболевания. При симптомах, сомнениях и перед новой нагрузкой посоветуйся с врачом или профильным специалистом.");
+    paragraph(disclaimer,"Фотографии и ответы в этой версии обрабатываются на твоём устройстве; итоговый отчёт не сохраняется на нашем сервере.").className="report-note";
   }
   function add(tag,text,parent){const el=document.createElement(tag);el.textContent=text;parent.append(el);return el;}
   button.addEventListener("click",async()=>{
@@ -278,7 +371,7 @@
     add("p","При первом запуске это может занять несколько секунд. Интернет должен быть включён.",resultBox);
     try{
       const model=await getLandmarker();resultBox.replaceChildren();add("h2","Проверяем фотографии…",resultBox);
-      const report=[];const measurements=[];
+      const report=[];const measurements=[];const photoMetrics={side:null,front:null,back:null};let photoOk=true;
       for(const id of slots){
         status(id,"Анализ ориентиров тела…","warn");
         const canvas=await loadSource(id);
@@ -286,11 +379,13 @@
         // Yield to the browser between images so status text can update.
         await new Promise(resolve=>setTimeout(resolve,30));
         const answer=model.detect(canvas);const poses=answer.landmarks||[];
-        if(poses.length===0){drawOverlay(id,canvas,null);status(id,"✕ Человек не распознан. Нужен снимок в полный рост, без перекрытий.","bad");report.push(`«${names[id]}»: человек не найден.`);continue;}
-        if(poses.length>1){drawOverlay(id,canvas,poses[0]);status(id,"✕ Найдено несколько людей. Нужен один человек в кадре.","bad");report.push(`«${names[id]}»: несколько людей в кадре.`);continue;}
+        if(poses.length===0){photoOk=false;drawOverlay(id,canvas,null);status(id,"✕ Человек не распознан. Нужен снимок в полный рост, без перекрытий.","bad");report.push(`«${names[id]}»: человек не найден.`);continue;}
+        if(poses.length>1){photoOk=false;drawOverlay(id,canvas,poses[0]);status(id,"✕ Найдено несколько людей. Нужен один человек в кадре.","bad");report.push(`«${names[id]}»: несколько людей в кадре.`);continue;}
         drawOverlay(id,canvas,poses[0]);const missing=checkLandmarks(poses[0]);
-        if(!missing.length&&!lighting)measurements.push(...measurementFor(id,poses[0],canvas));
-        else measurements.push(`«${names[id]}»: числовые наблюдения пропущены — снимок требует улучшения.`);
+        if(!missing.length&&!lighting){
+          measurements.push(...measurementFor(id,poses[0],canvas));
+          photoMetrics[id]=id==="side"?sideOffsets(poses[0],canvas):shoulderAngle(poses[0],canvas);
+        }else{photoOk=false;measurements.push(`«${names[id]}»: числовые наблюдения пропущены — снимок требует улучшения.`);}
         const problems=[];if(missing.length)problems.push(`Не видны достаточно уверенно: ${missing.join(", ")}. Нужен снимок в полный рост, от головы до стоп.`);
         if(lighting)problems.push(lighting);
         if(problems.length){status(id,"⚠ "+problems.join(" ")+" Попробуй переснять.","warn");report.push(`«${names[id]}»: требуется улучшение фото.`);}
@@ -303,8 +398,8 @@
       const ml=document.createElement("ul");for(const line of measurements)add("li",line,ml);section.append(ml);
       add("p","Цифры рассчитаны по точкам на фото, а не по положению костей. Их нельзя сравнивать с медицинскими нормами: наклон камеры, ракурс, одежда и ошибки распознавания меняют результат.",section).className="disclaimer";
       resultBox.append(section);
-      renderSurveySummary(resultBox);
-      add("p","Важно: по этим данным нельзя определить гиперлордоз, наклон таза, причину выпирающего живота или назначить упражнения. Мы только проверяем возможности измерения геометрии на фотографиях.",resultBox).className="disclaimer";
+      renderSurveySummary(resultBox,photoMetrics,photoOk);
+      add("p","Важное ограничение: это не диагноз. По фото нельзя определить угол гиперлордоза, причину боли или необходимость коррекции. Результаты не заменяют консультацию специалиста.",resultBox).className="disclaimer";
     }catch(e){
       console.error("MediaPipe initialization/detection error:",e);
       resultBox.replaceChildren();add("h2","Не удалось загрузить MediaPipe",resultBox);
