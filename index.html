@@ -4,120 +4,176 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="color-scheme" content="light" />
-  <title>Posture Check · Прототип</title>
+  <title>Posture Check · Проверка фото с MediaPipe</title>
   <style>
-    :root { font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color:#1d232a; background:#f4f5f7; }
-    * {box-sizing:border-box}
-    body {margin:0; padding:28px 16px 52px}
-    main {max-width:780px; margin:0 auto}
-    h1 {font-size:clamp(26px,5vw,40px);letter-spacing:-.045em;margin:10px 0}
-    h2 {font-size:18px;margin:0 0 6px}
-    p {line-height:1.5}
-    .sub {color:#636b73;margin:0 0 26px}
-    .eyebrow {font-size:12px;letter-spacing:.12em;font-weight:700;color:#666e77;text-transform:uppercase}
-    .notice {padding:15px 17px;border:1px solid #d9e0e7;background:#fff;border-radius:14px;color:#464e57;margin:22px 0}
-    .card {background:#fff;border:1px solid #e5e7eb;border-radius:17px;padding:19px;margin:14px 0}
-    .card-head{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
-    .hint{font-size:13px;color:#68707a;margin:4px 0 15px}
-    input[type=file] {width:100%;padding:13px;border:1px dashed #a7b0ba;border-radius:12px;background:#fafafa;font:inherit;cursor:pointer}
-    input[type=file]::file-selector-button {font:inherit;font-weight:600;border:0;border-radius:9px;padding:9px 13px;background:#e8edf2;margin-right:12px;cursor:pointer}
-    .preview {display:none;width:100%;max-height:360px;object-fit:contain;background:#f5f6f8;border-radius:11px;margin-top:14px}
-    .status{font-size:13px;font-weight:600;color:#6b7280;margin-top:10px}
-    .status.ok{color:#087846}.status.bad{color:#b42318}
-    button {background:#171b20;color:#fff;border:0;border-radius:11px;padding:15px 22px;font:inherit;font-weight:700;cursor:pointer;width:100%;margin-top:14px}
-    button:disabled {background:#aeb5bf;cursor:not-allowed}
-    #result {display:none;background:#fff;border:1px solid #d9e0e7;border-radius:16px;margin-top:18px;padding:20px}
-    #result h2{color:#087846}
-    .small {font-size:12px;color:#66717c;margin-top:15px}
+    :root{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#1d232a;background:#f4f5f7}
+    *{box-sizing:border-box} body{margin:0;padding:28px 16px 52px}main{max-width:780px;margin:auto}
+    h1{font-size:clamp(26px,5vw,40px);letter-spacing:-.045em;margin:10px 0}h2{font-size:18px;margin:0 0 6px}p{line-height:1.5}
+    .sub{color:#636b73;margin:0 0 24px}.eyebrow{font-size:12px;letter-spacing:.12em;font-weight:700;color:#666e77;text-transform:uppercase}
+    .notice{padding:15px 17px;border:1px solid #d9e0e7;background:#fff;border-radius:14px;color:#464e57;margin:20px 0}
+    .card{background:#fff;border:1px solid #e5e7eb;border-radius:17px;padding:19px;margin:14px 0}
+    .card-head{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}.hint{font-size:13px;color:#68707a;margin:4px 0 15px}
+    input[type=file]{width:100%;padding:13px;border:1px dashed #a7b0ba;border-radius:12px;background:#fafafa;font:inherit;cursor:pointer}
+    input[type=file]::file-selector-button{font:inherit;font-weight:600;border:0;border-radius:9px;padding:9px 13px;background:#e8edf2;margin-right:12px;cursor:pointer}
+    .preview{display:none;width:100%;max-height:340px;object-fit:contain;background:#f5f6f8;border-radius:11px;margin-top:14px}
+    canvas{display:none;width:100%;max-height:340px;object-fit:contain;background:#f5f6f8;border-radius:11px;margin-top:14px}
+    .status{font-size:13px;font-weight:600;color:#6b7280;margin-top:10px;white-space:pre-line}.status.ok{color:#087846}.status.bad{color:#b42318}.status.warn{color:#8b6300}
+    button{background:#171b20;color:#fff;border:0;border-radius:11px;padding:15px 22px;font:inherit;font-weight:700;cursor:pointer;width:100%;margin-top:14px}button:disabled{background:#aeb5bf;cursor:not-allowed}
+    #result{display:none;background:#fff;border:1px solid #d9e0e7;border-radius:16px;margin-top:18px;padding:20px}#result h2{font-size:21px;margin:0 0 12px}
+    #result ul{padding-left:22px;line-height:1.65;margin-bottom:6px}.small{font-size:12px;color:#66717c;margin-top:15px}.confirm{display:flex;align-items:start;gap:9px;font-size:14px;color:#49515b;margin:12px 0 0}.confirm input{margin-top:4px}
   </style>
 </head>
 <body>
 <main>
-  <div class="eyebrow">Прототип · шаг 1</div>
+  <div class="eyebrow">Прототип · шаг 2</div>
   <h1>Проверка фотографий осанки</h1>
-  <p class="sub">Загрузи три фотографии. Эта версия проверяет только формат, размер и возможность открыть изображение. Анализ осанки пока не подключён.</p>
-  <div class="notice"><strong>Конфиденциальность:</strong> фотографии остаются в браузере на твоём устройстве. Эта страница не отправляет их на сервер и не сохраняет в GitHub. Для тестирования используй снимки, на обработку которых получено согласие.</div>
+  <p class="sub">Загрузи три снимка. Бесплатная технология MediaPipe попробует найти ориентиры тела и проверить, видно ли человека достаточно полно. Это ещё не анализ осанки.</p>
+  <div class="notice"><strong>Конфиденциальность:</strong> выбранные фотографии обрабатываются локально в браузере. Программа не загружает их в GitHub и не отправляет на наш сервер. Для работы требуется интернет: код MediaPipe и модель загружаются с внешних технических серверов. Используй только снимки, на обработку которых есть согласие.</div>
   <section class="card" data-kind="side">
     <div class="card-head"><h2>1. Вид сбоку</h2><span aria-hidden="true">↔</span></div>
-    <p class="hint">В полный рост, камера примерно на уровне талии, руки свободно опущены.</p>
+    <p class="hint">В полный рост, строго боком к камере, камера примерно на уровне талии, руки вдоль корпуса. Не втягивай живот.</p>
     <input id="side" type="file" accept="image/jpeg,image/png,image/webp" aria-label="Фотография сбоку" />
     <img class="preview" alt="Предпросмотр фотографии сбоку" />
+    <canvas aria-label="Снимок сбоку с найденными ориентирами тела"></canvas>
     <div class="status" aria-live="polite">Фото ещё не выбрано</div>
   </section>
   <section class="card" data-kind="front">
     <div class="card-head"><h2>2. Вид спереди</h2><span aria-hidden="true">↑</span></div>
-    <p class="hint">В полный рост, лицом к камере, руки свободно опущены.</p>
+    <p class="hint">В полный рост, лицом к камере, руки свободно опущены, тело не повёрнуто.</p>
     <input id="front" type="file" accept="image/jpeg,image/png,image/webp" aria-label="Фотография спереди" />
     <img class="preview" alt="Предпросмотр фотографии спереди" />
+    <canvas aria-label="Снимок спереди с найденными ориентирами тела"></canvas>
     <div class="status" aria-live="polite">Фото ещё не выбрано</div>
   </section>
   <section class="card" data-kind="back">
     <div class="card-head"><h2>3. Вид сзади</h2><span aria-hidden="true">↓</span></div>
-    <p class="hint">В полный рост, спиной к камере, руки свободно опущены.</p>
+    <p class="hint">В полный рост, спиной к камере, руки вдоль корпуса. Лучше однотонная облегающая одежда.</p>
     <input id="back" type="file" accept="image/jpeg,image/png,image/webp" aria-label="Фотография сзади" />
     <img class="preview" alt="Предпросмотр фотографии сзади" />
+    <canvas aria-label="Снимок сзади с найденными ориентирами тела"></canvas>
     <div class="status" aria-live="polite">Фото ещё не выбрано</div>
   </section>
-  <button type="button" id="check" disabled>Проверить три фотографии</button>
+  <label class="confirm"><input type="checkbox" id="views" /> <span>Я проверил(а), что фотографии соответствуют указанным ракурсам. MediaPipe пока не умеет надёжно отличать снимок спереди от снимка сзади.</span></label>
+  <button type="button" id="check" disabled>Проверить три фотографии с MediaPipe</button>
   <div id="result" role="status" aria-live="polite"></div>
-  <p class="small">Важно: этот прототип пока не определяет, есть ли гиперлордоз. Даже будущий анализ по фото не сможет заменить медицинскую диагностику.</p>
+  <p class="small">Ограничение: модель находит ориентиры тела, но не видит поясничные позвонки и не ставит диагноз «гиперлордоз». Отклонение или недостаточная видимость точек не означает заболевание. Первый запуск может занять время из-за загрузки модели.</p>
 </main>
-<script>
-  const slots = ["side", "front", "back"];
-  const valid = new Map();
-  const MAX_SIZE = 12 * 1024 * 1024;
-  const button = document.getElementById("check");
-  const result = document.getElementById("result");
-  const allowedTypes = new Set(["image/jpeg", "image/png", "image/webp"]);
-  function displayStatus(input, message, state) {
-    const el = input.closest(".card").querySelector(".status");
-    el.textContent = message;
-    el.className = "status" + (state ? " " + state : "");
+<script type="module">
+  const slots=["side","front","back"];
+  const files=new Map(), urls=new Map();
+  const MAX_SIZE=12*1024*1024;
+  const button=document.getElementById("check"), resultBox=document.getElementById("result"), views=document.getElementById("views");
+  const allowedTypes=new Set(["image/jpeg","image/png","image/webp"]);
+  const names={side:"Сбоку",front:"Спереди",back:"Сзади"};
+  let landmarker=null;
+  function status(id,message,type=""){
+    const el=document.querySelector(`[data-kind="${id}"] .status`);
+    el.textContent=message;el.className="status"+(type?" "+type:"");
   }
-  function updateButton() { button.disabled = !slots.every(id => valid.get(id)); }
-  slots.forEach(id => {
-    const input = document.getElementById(id);
-    const preview = input.closest(".card").querySelector(".preview");
-    let currentUrl = null;
-    input.addEventListener("change", () => {
-      result.style.display = "none";
-      valid.set(id, false);
-      updateButton();
-      if (currentUrl) URL.revokeObjectURL(currentUrl);
-      currentUrl = null;
-      preview.style.display = "none";
-      preview.removeAttribute("src");
-      const file = input.files && input.files[0];
-      if (!file) { displayStatus(input, "Фото ещё не выбрано"); return; }
-      if (!allowedTypes.has(file.type)) { displayStatus(input, "Нужен файл JPG, PNG или WebP", "bad"); return; }
-      if (file.size > MAX_SIZE) { displayStatus(input, "Фото больше 12 МБ. Выбери файл поменьше", "bad"); return; }
-      currentUrl = URL.createObjectURL(file);
-      const tempImage = new Image();
-      tempImage.onload = () => {
-        if (tempImage.naturalWidth < 600 || tempImage.naturalHeight < 600) {
-          displayStatus(input, "Низкое разрешение (нужно минимум 600 пикселей по каждой стороне)", "bad");
-          return;
-        }
-        preview.src = currentUrl;
-        preview.style.display = "block";
-        valid.set(id, true);
-        displayStatus(input, "✓ Файл подходит для следующего этапа", "ok");
-        updateButton();
+  function updateButton(){button.disabled=!views.checked||!slots.every(id=>files.has(id));}
+  function clearResult(){resultBox.style.display="none";resultBox.replaceChildren();}
+  views.addEventListener("change",updateButton);
+  slots.forEach(id=>{
+    const input=document.getElementById(id),card=input.closest(".card"),preview=card.querySelector(".preview"),canvas=card.querySelector("canvas");
+    input.addEventListener("change",async()=>{
+      clearResult();files.delete(id);updateButton();canvas.style.display="none";
+      if(urls.has(id)){URL.revokeObjectURL(urls.get(id));urls.delete(id);}
+      preview.style.display="none";preview.removeAttribute("src");
+      const file=input.files?.[0];if(!file){status(id,"Фото ещё не выбрано");return;}
+      if(!allowedTypes.has(file.type)){status(id,"Нужен JPG, PNG или WebP","bad");return;}
+      if(file.size>MAX_SIZE){status(id,"Файл больше 12 МБ. Выбери снимок поменьше","bad");return;}
+      const url=URL.createObjectURL(file);urls.set(id,url);
+      const test=new Image();
+      test.onload=()=>{
+        if(urls.get(id)!==url)return;
+        if(Math.min(test.naturalWidth,test.naturalHeight)<600){status(id,"Слишком маленькое изображение: нужно минимум 600 пикселей по короткой стороне","bad");return;}
+        preview.src=url;preview.style.display="block";files.set(id,file);
+        status(id,"✓ Файл загружен. Проверка ориентиров тела начнётся по кнопке.","ok");updateButton();
       };
-      tempImage.onerror = () => displayStatus(input, "Не удалось открыть изображение", "bad");
-      tempImage.src = currentUrl;
+      test.onerror=()=>status(id,"Не удалось прочитать фотографию","bad");
+      test.src=url;
     });
   });
-  button.addEventListener("click", () => {
-    if (!slots.every(id => valid.get(id))) return;
-    result.replaceChildren();
-    const heading = document.createElement("h2");
-    heading.textContent = "✓ Все три файла загружены";
-    const message = document.createElement("p");
-    message.textContent = "Первый технический этап работает. Пока не проверяются положение тела, ракурс и гиперлордоз. Следующий шаг: подключение распознавания ориентиров тела (MediaPipe).";
-    result.append(heading, message);
-    result.style.display = "block";
-    result.scrollIntoView({behavior:"smooth", block:"nearest"});
+  async function getLandmarker(){
+    if(landmarker)return landmarker;
+    const {PoseLandmarker,FilesetResolver}=await import("https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.22/vision_bundle.mjs");
+    const vision=await FilesetResolver.forVisionTasks("https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.22/wasm");
+    landmarker=await PoseLandmarker.createFromOptions(vision,{
+      baseOptions:{modelAssetPath:"https://storage.googleapis.com/mediapipe-models/pose_landmarker/pose_landmarker_lite/float16/1/pose_landmarker_lite.task",delegate:"CPU"},
+      runningMode:"IMAGE",numPoses:2,minPoseDetectionConfidence:0.5,minPosePresenceConfidence:0.5
+    });
+    return landmarker;
+  }
+  async function loadSource(id){
+    const img=new Image();img.src=urls.get(id);await img.decode();
+    const longest=Math.max(img.naturalWidth,img.naturalHeight),scale=Math.min(1,1280/longest);
+    const canvas=document.createElement("canvas");canvas.width=Math.round(img.naturalWidth*scale);canvas.height=Math.round(img.naturalHeight*scale);
+    canvas.getContext("2d",{willReadFrequently:true}).drawImage(img,0,0,canvas.width,canvas.height);
+    return canvas;
+  }
+  function checkLighting(canvas){
+    const check=document.createElement("canvas");check.width=64;check.height=64;
+    const ctx=check.getContext("2d",{willReadFrequently:true});ctx.drawImage(canvas,0,0,64,64);
+    const data=ctx.getImageData(0,0,64,64).data;let sum=0,below=0;
+    for(let i=0;i<data.length;i+=4){const b=(data[i]+data[i+1]+data[i+2])/3;sum+=b;if(b<28)below++;}
+    const mean=sum/(data.length/4);return mean<45||below>3100?"Снимок очень тёмный: лучше переснять при хорошем освещении.":null;
+  }
+  const pairs=[[11,12],[11,23],[12,24],[23,24],[23,25],[24,26],[25,27],[26,28],[27,31],[28,32]];
+  function drawOverlay(id,source,landmarks){
+    const canvas=document.querySelector(`[data-kind="${id}"] canvas`);
+    canvas.width=source.width;canvas.height=source.height;
+    const ctx=canvas.getContext("2d");ctx.drawImage(source,0,0);
+    if(landmarks){
+      ctx.strokeStyle="#00e1b4";ctx.fillStyle="#00e1b4";ctx.lineWidth=Math.max(3,canvas.width/200);
+      for(const [a,b] of pairs){const l=landmarks[a],r=landmarks[b];if((l.visibility??1)<.4||(r.visibility??1)<.4)continue;ctx.beginPath();ctx.moveTo(l.x*canvas.width,l.y*canvas.height);ctx.lineTo(r.x*canvas.width,r.y*canvas.height);ctx.stroke();}
+      for(const index of [0,11,12,23,24,25,26,27,28,31,32]){
+        const p=landmarks[index];if((p.visibility??1)<.4)continue;
+        ctx.beginPath();ctx.arc(p.x*canvas.width,p.y*canvas.height,Math.max(4,canvas.width/180),0,Math.PI*2);ctx.fill();
+      }
+    }
+    canvas.style.display="block";
+    document.querySelector(`[data-kind="${id}"] .preview`).style.display="none";
+  }
+  function checkLandmarks(lm){
+    // These are basic visibility/cropping signals, NOT measurements of posture.
+    const visible=i=>lm[i] && (lm[i].visibility??0)>.42 && lm[i].x>.015 && lm[i].x<.985 && lm[i].y>.015 && lm[i].y<.985;
+    const head=visible(0),shoulder=visible(11)||visible(12),hip=visible(23)||visible(24),knee=visible(25)||visible(26),ankle=visible(27)||visible(28);
+    const missing=[];if(!head)missing.push("голова");if(!shoulder)missing.push("плечи");if(!hip)missing.push("таз");if(!knee)missing.push("колени");if(!ankle)missing.push("голеностопы");
+    return missing;
+  }
+  function add(tag,text,parent){const el=document.createElement(tag);el.textContent=text;parent.append(el);return el;}
+  button.addEventListener("click",async()=>{
+    if(button.disabled)return;
+    button.disabled=true;clearResult();resultBox.style.display="block";
+    add("h2","Загружаем модель распознавания…",resultBox);
+    add("p","При первом запуске это может занять несколько секунд. Интернет должен быть включён.",resultBox);
+    try{
+      const model=await getLandmarker();resultBox.replaceChildren();add("h2","Проверяем фотографии…",resultBox);
+      const report=[];
+      for(const id of slots){
+        status(id,"Анализ ориентиров тела…","warn");
+        const canvas=await loadSource(id);
+        const lighting=checkLighting(canvas);
+        // Yield to the browser between images so status text can update.
+        await new Promise(resolve=>setTimeout(resolve,30));
+        const answer=model.detect(canvas);const poses=answer.landmarks||[];
+        if(poses.length===0){drawOverlay(id,canvas,null);status(id,"✕ Человек не распознан. Нужен снимок в полный рост, без перекрытий.","bad");report.push(`«${names[id]}»: человек не найден.`);continue;}
+        if(poses.length>1){drawOverlay(id,canvas,poses[0]);status(id,"✕ Найдено несколько людей. Нужен один человек в кадре.","bad");report.push(`«${names[id]}»: несколько людей в кадре.`);continue;}
+        drawOverlay(id,canvas,poses[0]);const missing=checkLandmarks(poses[0]);
+        const problems=[];if(missing.length)problems.push(`Не видны достаточно уверенно: ${missing.join(", ")}.`);
+        if(lighting)problems.push(lighting);
+        if(problems.length){status(id,"⚠ "+problems.join(" ")+" Попробуй переснять.","warn");report.push(`«${names[id]}»: требуется улучшение фото.`);}
+        else{status(id,"✓ Основные ориентиры найдены. Зелёные точки показывают работу модели.","ok");report.push(`«${names[id]}»: основные ориентиры найдены.`);}
+      }
+      resultBox.replaceChildren();add("h2","Результат проверки фото",resultBox);
+      const ul=document.createElement("ul");for(const line of report)add("li",line,ul);resultBox.append(ul);
+      add("p","Это технический тест распознавания точек тела. Ракурсы и медицинские особенности осанки пока автоматически не определяются. Зелёные линии не являются диагностикой.",resultBox);
+    }catch(e){
+      console.error("MediaPipe initialization/detection error:",e);
+      resultBox.replaceChildren();add("h2","Не удалось загрузить MediaPipe",resultBox);
+      add("p","Проверь интернет, попробуй Chrome или обнови страницу. Иногда доступ к серверам модели блокируется сетью. Фотографии никуда не отправлены.",resultBox);
+      add("p","Техническая ошибка: "+String(e?.message||e).slice(0,240),resultBox);
+    }finally{updateButton();resultBox.scrollIntoView({behavior:"smooth",block:"nearest"});}
   });
 </script>
 </body>
