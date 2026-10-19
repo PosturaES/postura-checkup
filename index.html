@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="light" />
+  <title>Posture Check · Прототип</title>
+  <style>
+    :root { font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color:#1d232a; background:#f4f5f7; }
+    * {box-sizing:border-box}
+    body {margin:0; padding:28px 16px 52px}
+    main {max-width:780px; margin:0 auto}
+    h1 {font-size:clamp(26px,5vw,40px);letter-spacing:-.045em;margin:10px 0}
+    h2 {font-size:18px;margin:0 0 6px}
+    p {line-height:1.5}
+    .sub {color:#636b73;margin:0 0 26px}
+    .eyebrow {font-size:12px;letter-spacing:.12em;font-weight:700;color:#666e77;text-transform:uppercase}
+    .notice {padding:15px 17px;border:1px solid #d9e0e7;background:#fff;border-radius:14px;color:#464e57;margin:22px 0}
+    .card {background:#fff;border:1px solid #e5e7eb;border-radius:17px;padding:19px;margin:14px 0}
+    .card-head{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+    .hint{font-size:13px;color:#68707a;margin:4px 0 15px}
+    input[type=file] {width:100%;padding:13px;border:1px dashed #a7b0ba;border-radius:12px;background:#fafafa;font:inherit;cursor:pointer}
+    input[type=file]::file-selector-button {font:inherit;font-weight:600;border:0;border-radius:9px;padding:9px 13px;background:#e8edf2;margin-right:12px;cursor:pointer}
+    .preview {display:none;width:100%;max-height:360px;object-fit:contain;background:#f5f6f8;border-radius:11px;margin-top:14px}
+    .status{font-size:13px;font-weight:600;color:#6b7280;margin-top:10px}
+    .status.ok{color:#087846}.status.bad{color:#b42318}
+    button {background:#171b20;color:#fff;border:0;border-radius:11px;padding:15px 22px;font:inherit;font-weight:700;cursor:pointer;width:100%;margin-top:14px}
+    button:disabled {background:#aeb5bf;cursor:not-allowed}
+    #result {display:none;background:#fff;border:1px solid #d9e0e7;border-radius:16px;margin-top:18px;padding:20px}
+    #result h2{color:#087846}
+    .small {font-size:12px;color:#66717c;margin-top:15px}
+  </style>
+</head>
+<body>
+<main>
+  <div class="eyebrow">Прототип · шаг 1</div>
+  <h1>Проверка фотографий осанки</h1>
+  <p class="sub">Загрузи три фотографии. Эта версия проверяет только формат, размер и возможность открыть изображение. Анализ осанки пока не подключён.</p>
+  <div class="notice"><strong>Конфиденциальность:</strong> фотографии остаются в браузере на твоём устройстве. Эта страница не отправляет их на сервер и не сохраняет в GitHub. Для тестирования используй снимки, на обработку которых получено согласие.</div>
+  <section class="card" data-kind="side">
+    <div class="card-head"><h2>1. Вид сбоку</h2><span aria-hidden="true">↔</span></div>
+    <p class="hint">В полный рост, камера примерно на уровне талии, руки свободно опущены.</p>
+    <input id="side" type="file" accept="image/jpeg,image/png,image/webp" aria-label="Фотография сбоку" />
+    <img class="preview" alt="Предпросмотр фотографии сбоку" />
+    <div class="status" aria-live="polite">Фото ещё не выбрано</div>
+  </section>
+  <section class="card" data-kind="front">
+    <div class="card-head"><h2>2. Вид спереди</h2><span aria-hidden="true">↑</span></div>
+    <p class="hint">В полный рост, лицом к камере, руки свободно опущены.</p>
+    <input id="front" type="file" accept="image/jpeg,image/png,image/webp" aria-label="Фотография спереди" />
+    <img class="preview" alt="Предпросмотр фотографии спереди" />
+    <div class="status" aria-live="polite">Фото ещё не выбрано</div>
+  </section>
+  <section class="card" data-kind="back">
+    <div class="card-head"><h2>3. Вид сзади</h2><span aria-hidden="true">↓</span></div>
+    <p class="hint">В полный рост, спиной к камере, руки свободно опущены.</p>
+    <input id="back" type="file" accept="image/jpeg,image/png,image/webp" aria-label="Фотография сзади" />
+    <img class="preview" alt="Предпросмотр фотографии сзади" />
+    <div class="status" aria-live="polite">Фото ещё не выбрано</div>
+  </section>
+  <button type="button" id="check" disabled>Проверить три фотографии</button>
+  <div id="result" role="status" aria-live="polite"></div>
+  <p class="small">Важно: этот прототип пока не определяет, есть ли гиперлордоз. Даже будущий анализ по фото не сможет заменить медицинскую диагностику.</p>
+</main>
+<script>
+  const slots = ["side", "front", "back"];
+  const valid = new Map();
+  const MAX_SIZE = 12 * 1024 * 1024;
+  const button = document.getElementById("check");
+  const result = document.getElementById("result");
+  const allowedTypes = new Set(["image/jpeg", "image/png", "image/webp"]);
+  function displayStatus(input, message, state) {
+    const el = input.closest(".card").querySelector(".status");
+    el.textContent = message;
+    el.className = "status" + (state ? " " + state : "");
+  }
+  function updateButton() { button.disabled = !slots.every(id => valid.get(id)); }
+  slots.forEach(id => {
+    const input = document.getElementById(id);
+    const preview = input.closest(".card").querySelector(".preview");
+    let currentUrl = null;
+    input.addEventListener("change", () => {
+      result.style.display = "none";
+      valid.set(id, false);
+      updateButton();
+      if (currentUrl) URL.revokeObjectURL(currentUrl);
+      currentUrl = null;
+      preview.style.display = "none";
+      preview.removeAttribute("src");
+      const file = input.files && input.files[0];
+      if (!file) { displayStatus(input, "Фото ещё не выбрано"); return; }
+      if (!allowedTypes.has(file.type)) { displayStatus(input, "Нужен файл JPG, PNG или WebP", "bad"); return; }
+      if (file.size > MAX_SIZE) { displayStatus(input, "Фото больше 12 МБ. Выбери файл поменьше", "bad"); return; }
+      currentUrl = URL.createObjectURL(file);
+      const tempImage = new Image();
+      tempImage.onload = () => {
+        if (tempImage.naturalWidth < 600 || tempImage.naturalHeight < 600) {
+          displayStatus(input, "Низкое разрешение (нужно минимум 600 пикселей по каждой стороне)", "bad");
+          return;
+        }
+        preview.src = currentUrl;
+        preview.style.display = "block";
+        valid.set(id, true);
+        displayStatus(input, "✓ Файл подходит для следующего этапа", "ok");
+        updateButton();
+      };
+      tempImage.onerror = () => displayStatus(input, "Не удалось открыть изображение", "bad");
+      tempImage.src = currentUrl;
+    });
+  });
+  button.addEventListener("click", () => {
+    if (!slots.every(id => valid.get(id))) return;
+    result.replaceChildren();
+    const heading = document.createElement("h2");
+    heading.textContent = "✓ Все три файла загружены";
+    const message = document.createElement("p");
+    message.textContent = "Первый технический этап работает. Пока не проверяются положение тела, ракурс и гиперлордоз. Следующий шаг: подключение распознавания ориентиров тела (MediaPipe).";
+    result.append(heading, message);
+    result.style.display = "block";
+    result.scrollIntoView({behavior:"smooth", block:"nearest"});
+  });
+</script>
+</body>
+</html>
