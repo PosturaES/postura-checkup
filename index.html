@@ -21,13 +21,16 @@
     button{background:#171b20;color:#fff;border:0;border-radius:11px;padding:15px 22px;font:inherit;font-weight:700;cursor:pointer;width:100%;margin-top:14px}button:disabled{background:#aeb5bf;cursor:not-allowed}
     #result{display:none;background:#fff;border:1px solid #d9e0e7;border-radius:16px;margin-top:18px;padding:20px}#result h2{font-size:21px;margin:0 0 12px}
     #result ul{padding-left:22px;line-height:1.65;margin-bottom:6px}.small{font-size:12px;color:#66717c;margin-top:15px}.confirm{display:flex;align-items:start;gap:9px;font-size:14px;color:#49515b;margin:12px 0 0}.confirm input{margin-top:4px}
+    .measurements{margin-top:16px;padding:16px;border:1px solid #d6e3e6;border-radius:13px;background:#f2f8f8}
+    .measurements h3{font-size:18px;margin:0 0 8px}.measurements ul{margin:6px 0 10px}
+    .disclaimer{font-size:13px;color:#4a5965;line-height:1.55;margin-top:14px}
   </style>
 </head>
 <body>
 <main>
-  <div class="eyebrow">Прототип · шаг 2.1</div>
+  <div class="eyebrow">Прототип · шаг 3</div>
   <h1>Проверка фотографий осанки</h1>
-  <p class="sub">Загрузи три фотографии: сбоку, спереди и сзади. На каждой должен быть виден человек целиком. MediaPipe проверит, удалось ли распознать ориентиры тела. Это ещё не анализ осанки.</p>
+  <p class="sub">Загрузи три фотографии: сбоку, спереди и сзади. На каждой должен быть виден человек целиком. MediaPipe проверит, удалось ли распознать ориентиры тела. Дополнительно страница покажет первые <b>пробные геометрические наблюдения</b> по снимкам, без медицинских выводов.</p>
   <div class="photo-rule"><strong>ВАЖНО: все 3 фото только В ПОЛНЫЙ РОСТ!</strong>Человек должен быть виден целиком: <b>от макушки головы до обеих стоп</b>. Не обрезай голову, ноги и стопы. Оставь немного свободного места сверху и снизу. <b>Фотографии по пояс НЕ подходят.</b></div>
   <div class="notice"><strong>Конфиденциальность:</strong> выбранные фотографии обрабатываются локально в браузере. Программа не загружает их в GitHub и не отправляет на наш сервер. Для работы требуется интернет: код MediaPipe и модель загружаются с внешних технических серверов. Используй только снимки, на обработку которых есть согласие.</div>
   <section class="card" data-kind="side">
@@ -55,7 +58,7 @@
     <div class="status" aria-live="polite">Фото ещё не выбрано</div>
   </section>
   <label class="confirm"><input type="checkbox" id="views" /> <span>Я проверил(а), что <b>на всех трёх фотографиях человек виден в полный рост, от головы до стоп</b>, и что ракурсы соответствуют подписям. MediaPipe пока не умеет надёжно отличать снимок спереди от снимка сзади.</span></label>
-  <button type="button" id="check" disabled>Проверить 3 фото в полный рост</button>
+  <button type="button" id="check" disabled>Проверить фото и показать наблюдения</button>
   <div id="result" role="status" aria-live="polite"></div>
   <p class="small">Ограничение: модель находит ориентиры тела, но не видит поясничные позвонки и не ставит диагноз «гиперлордоз». Отклонение или недостаточная видимость точек не означает заболевание. Первый запуск может занять время из-за загрузки модели.</p>
 </main>
@@ -143,6 +146,49 @@
     const missing=[];if(!head)missing.push("голова");if(!shoulder)missing.push("плечи");if(!hip)missing.push("таз");if(!knee)missing.push("колени");if(!ankle)missing.push("голеностопы");
     return missing;
   }
+  // Пробные измерения в плоскости фото, не оценка заболевания и не клинические нормы.
+  function confident(lm,i){
+    const p=lm?.[i];return p&&(p.visibility??0)>=.65&&p.x>.01&&p.x<.99&&p.y>.01&&p.y<.99?p:null;
+  }
+  function shoulderAngle(lm,source){
+    const a=confident(lm,11),b=confident(lm,12);
+    if(!a||!b)return null;
+    const dx=Math.abs((a.x-b.x)*source.width),dy=Math.abs((a.y-b.y)*source.height);
+    // На неверном ракурсе плечи могут проецироваться практически в одну точку.
+    if(dx<source.width*.055)return null;
+    return Math.round(Math.atan2(dy,dx)*180/Math.PI);
+  }
+  function sideOffsets(lm,source){
+    const candidates=[[7,11,23],[8,12,24]];
+    let best=null;
+    for(const [ear,shoulder,hip] of candidates){
+      const e=confident(lm,ear),s=confident(lm,shoulder),h=confident(lm,hip);
+      if(!e||!s||!h)continue;
+      const torsoHeight=Math.abs((s.y-h.y)*source.height);
+      if(torsoHeight<source.height*.12)continue;
+      const score=(e.visibility??0)+(s.visibility??0)+(h.visibility??0);
+      const outcome={score,earShoulder:Math.round(Math.abs(e.x-s.x)*source.width/torsoHeight*100),shoulderHip:Math.round(Math.abs(s.x-h.x)*source.width/torsoHeight*100)};
+      if(!best||score>best.score)best=outcome;
+    }
+    return best;
+  }
+  function measurementFor(id,lm,source){
+    const rows=[];
+    if(id==='front'||id==='back'){
+      const a=shoulderAngle(lm,source);
+      if(a===null)rows.push(`«${names[id]}»: линия плеч не измерена (проверь ракурс и видимость плеч).`);
+      else rows.push(`«${names[id]}»: линия между распознанными плечами наклонена примерно на ${a}° к горизонтали изображения.`);
+    }
+    if(id==='side'){
+      const r=sideOffsets(lm,source);
+      if(!r)rows.push('«Сбоку»: ориентиры уха, плеча и бедра недостаточно хорошо видны для измерения.');
+      else{
+        rows.push(`«Сбоку»: горизонтальное расстояние между проекциями уха и плеча ≈ ${r.earShoulder}% длины корпуса на фото.`);
+        rows.push(`«Сбоку»: горизонтальное расстояние между проекциями плеча и тазобедренной области ≈ ${r.shoulderHip}% длины корпуса на фото.`);
+      }
+    }
+    return rows;
+  }
   function add(tag,text,parent){const el=document.createElement(tag);el.textContent=text;parent.append(el);return el;}
   button.addEventListener("click",async()=>{
     if(button.disabled)return;
@@ -151,7 +197,7 @@
     add("p","При первом запуске это может занять несколько секунд. Интернет должен быть включён.",resultBox);
     try{
       const model=await getLandmarker();resultBox.replaceChildren();add("h2","Проверяем фотографии…",resultBox);
-      const report=[];
+      const report=[];const measurements=[];
       for(const id of slots){
         status(id,"Анализ ориентиров тела…","warn");
         const canvas=await loadSource(id);
@@ -162,6 +208,8 @@
         if(poses.length===0){drawOverlay(id,canvas,null);status(id,"✕ Человек не распознан. Нужен снимок в полный рост, без перекрытий.","bad");report.push(`«${names[id]}»: человек не найден.`);continue;}
         if(poses.length>1){drawOverlay(id,canvas,poses[0]);status(id,"✕ Найдено несколько людей. Нужен один человек в кадре.","bad");report.push(`«${names[id]}»: несколько людей в кадре.`);continue;}
         drawOverlay(id,canvas,poses[0]);const missing=checkLandmarks(poses[0]);
+        if(!missing.length&&!lighting)measurements.push(...measurementFor(id,poses[0],canvas));
+        else measurements.push(`«${names[id]}»: числовые наблюдения пропущены — снимок требует улучшения.`);
         const problems=[];if(missing.length)problems.push(`Не видны достаточно уверенно: ${missing.join(", ")}. Нужен снимок в полный рост, от головы до стоп.`);
         if(lighting)problems.push(lighting);
         if(problems.length){status(id,"⚠ "+problems.join(" ")+" Попробуй переснять.","warn");report.push(`«${names[id]}»: требуется улучшение фото.`);}
@@ -169,7 +217,12 @@
       }
       resultBox.replaceChildren();add("h2","Результат проверки фото",resultBox);
       const ul=document.createElement("ul");for(const line of report)add("li",line,ul);resultBox.append(ul);
-      add("p","Это технический тест распознавания точек тела. Ракурсы и медицинские особенности осанки пока автоматически не определяются. Зелёные линии не являются диагностикой.",resultBox);
+      const section=document.createElement("section");section.className="measurements";
+      add("h3","Пробные геометрические наблюдения",section);
+      const ml=document.createElement("ul");for(const line of measurements)add("li",line,ml);section.append(ml);
+      add("p","Цифры рассчитаны по точкам на фото, а не по положению костей. Их нельзя сравнивать с медицинскими нормами: наклон камеры, ракурс, одежда и ошибки распознавания меняют результат.",section).className="disclaimer";
+      resultBox.append(section);
+      add("p","Важно: по этим данным нельзя определить гиперлордоз, наклон таза, причину выпирающего живота или назначить упражнения. Мы только проверяем возможности измерения геометрии на фотографиях.",resultBox).className="disclaimer";
     }catch(e){
       console.error("MediaPipe initialization/detection error:",e);
       resultBox.replaceChildren();add("h2","Не удалось загрузить MediaPipe",resultBox);
