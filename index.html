@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="color-scheme" content="light" />
-  <title>Моя персональная карта спины · Онлайн-проверка</title>
+  <title>Моя персональная карта спины · Версия 10</title>
   <style>
     :root{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#1d232a;background:#f4f5f7}
     *{box-sizing:border-box} body{margin:0;padding:28px 16px 52px}main{max-width:780px;margin:auto}
@@ -178,6 +178,47 @@
     .mini-takeaway strong{font-size:16px;color:#17654e}
     .mini-takeaway p{font-size:14px;line-height:1.65;margin:6px 0}
     @media(max-width:600px){.pose-example svg{height:128px}.pose-example{padding:8px 4px}.pose-example strong{font-size:11px}.pose-example span{font-size:10px}.photo-examples{padding:12px}.report-evidence{grid-template-columns:1fr}}
+
+    /* v10: guided report and a readable, independent paid-value result. */
+    .report-wizard{max-width:830px;margin:0 auto}
+    .report-lead{color:#53616d;font-size:16px!important;line-height:1.65}
+    .story-head{font-size:14px;color:#206750;font-weight:750;letter-spacing:.01em}
+    .report-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:17px 0}
+    .report-card{border:1px solid #d6e6de;background:#f4faf7;border-radius:14px;padding:17px;min-width:0}
+    .report-card .card-index{display:flex;align-items:center;justify-content:center;width:32px;height:32px;background:#d9eee4;color:#155d47;border-radius:10px;font-weight:800;margin-bottom:12px}
+    .report-card h3{margin:0 0 8px!important;font-size:16px!important;line-height:1.3}
+    .report-card p{font-size:13px!important;line-height:1.58!important;margin:0!important}
+    .report-signals{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:17px 0}
+    .report-signal{border-radius:13px;border:1px solid #dfe9e6;background:#f7faf8;padding:16px 17px}
+    .report-signal strong{display:block;color:#14684e;margin-bottom:8px}
+    .report-signal p{font-size:14px;line-height:1.6;margin:5px 0}
+    .report-group{background:#fff;border:1px solid #dce7e3;border-radius:15px;padding:18px;margin:16px 0}
+    .report-group h3{margin:0 0 9px;font-size:19px!important}
+    .report-group .fact{color:#426454;font-size:14px;line-height:1.65}
+    .report-group .why{font-size:15px;line-height:1.7}
+    .report-group .next{background:#eef7f2;padding:11px 13px;border-radius:10px;color:#224c3a;font-size:14px}
+    .report-group .next strong{color:#156449}
+    .report-footnote{margin-top:18px!important;color:#68757d!important;font-size:12px!important;line-height:1.55!important}
+    .report-chip{display:inline-flex;align-items:center;gap:5px;background:#e8f5ee;border:1px solid #d1e8db;border-radius:25px;padding:6px 11px;font-size:12px;font-weight:700;color:#16684d;margin:4px 4px 4px 0}
+    .report-muted{color:#617078!important;font-size:13px!important}
+    .report-course-reason{border-left:4px solid #1c775b;padding:10px 14px;background:#f4faf7;border-radius:0 10px 10px 0}
+    .save-report{background:#eff4f2!important;color:#176549!important;border:1px solid #c9ddd4!important;-webkit-text-fill-color:#176549!important;margin-top:9px}
+    .gender-field{border-top:0!important;background:#f1f8f5;border-radius:12px;padding:16px!important;margin-bottom:14px!important}
+    .gender-field legend{padding-top:6px}
+    .photo-examples .pose-example{padding:10px 7px}
+    .photo-examples .pose-example strong{font-size:13px}
+    .quality-error h3{margin:0 0 7px;font-size:17px}
+    @media(max-width:630px){.report-cards{grid-template-columns:1fr}.report-signals{grid-template-columns:1fr}.report-card{display:grid;grid-template-columns:35px 1fr;column-gap:12px}.report-card .card-index{grid-row:1 / span 2;margin:0}.report-card p{grid-column:2}.report-toolbar{flex-wrap:wrap}}
+    @media print{
+      body{background:white;padding:0;color:black}#intakeSection,#reviewSection,.report-toolbar,.wizard-nav,.save-report,.course-offer .cta{display:none!important}
+      #result{display:block!important;border:0!important;padding:0!important;max-width:none!important}
+      .wizard-top,.wizard-progress{display:none!important}
+      .wizard-panel{display:block!important;break-before:page;break-inside:auto}
+      .wizard-panel:first-of-type{break-before:auto}
+      .wizard-panel h2{margin-top:18px!important}
+      .report-card,.report-group,.report-signal{break-inside:avoid}
+      .course-offer{break-inside:avoid}
+    }
   </style>
 </head>
 <body>
@@ -190,10 +231,10 @@
   <p class="welcome-lead">Мы внимательно посмотрим, как расположено твоё тело на фотографиях, и сопоставим это с тем, что ты расскажешь о своих ощущениях.</p></div>
   <div class="journey">
     <div class="journey-row"><span class="journey-icon">01</span><div><strong>Три фотографии</strong><p>Сбоку, спереди и сзади. Программа найдёт ориентиры тела и покажет линии прямо на твоих снимках.</p></div></div>
-    <div class="journey-row"><span class="journey-icon">02</span><div><strong>7 коротких вопросов</strong><p>О том, что тебя беспокоит: поясница, живот, шея, плечи или осанка в целом.</p></div></div>
+    <div class="journey-row"><span class="journey-icon">02</span><div><strong>8 коротких вопросов</strong><p>О том, что тебя беспокоит: поясница, живот, шея, плечи или осанка в целом.</p></div></div>
     <div class="journey-row"><span class="journey-icon">03</span><div><strong>Твоя персональная карта</strong><p>Получишь наглядный разбор фотографий, наблюдения по своему запросу и возможные следующие шаги.</p></div></div>
   </div>
-  <div class="privacy-welcome"><strong>Твои фотографии остаются у тебя.</strong><p>В этой тестовой версии снимки и ответы обрабатываются в твоём браузере, не загружаются на наш сервер и не сохраняются в GitHub. Для работы библиотека анализа загружается из интернета. Используй только фотографии, на обработку которых ты согласен(на).</p></div>
+  <div class="privacy-welcome"><strong>Твои фотографии остаются у тебя.</strong><p>В этой тестовой версии снимки и ответы обрабатываются в твоём браузере, не загружаются на наш сервер и не сохраняются в GitHub. Для работы библиотека анализа загружается из интернета. Используй только фотографии, на обработку которых у тебя есть согласие.</p></div>
   <p class="welcome-foot">Это займёт несколько минут. Начнём?</p>
 </section><section class="intake-panel" data-intake="1" hidden>
   <div class="entry-head"><span class="step-tag">ФОТОГРАФИИ</span><h2>Покажи свою осанку с трёх сторон</h2><p>Выбери три фотографии. Важно, чтобы на каждой был один человек <strong>в полный рост, от макушки головы до стоп</strong>. Камера примерно на уровне талии, лучше ровный свет.</p></div>
@@ -225,11 +266,12 @@
 </section>
   <p class="entry-help" id="photoStepHint" aria-live="polite">Загрузи три фотографии, чтобы продолжить.</p>
 </section><section class="intake-panel" data-intake="2" hidden>
-  <div class="entry-head"><span class="step-tag">О ТЕБЕ</span><h2>Расскажи, что тебя беспокоит</h2><p>Всего семь вопросов. Твои ответы помогут сделать карту спины ближе именно к твоей ситуации.</p></div>
+  <div class="entry-head"><span class="step-tag">О ТЕБЕ</span><h2>Расскажи, что тебя беспокоит</h2><p>Несколько коротких вопросов. Расскажи, что для тебя важно, чтобы карта спины была действительно персональной.</p></div>
   <section class="questionnaire" id="questions">
-<h2>Короткая анкета: 7 вопросов</h2>
+<h2>Короткая анкета: 8 вопросов</h2>
 <p class="subq">Отметь, что тебя беспокоит. Можно выбрать несколько вариантов. Ответы помогут сделать итоговый разбор полезнее именно для тебя.</p>
 <form id="survey">
+<fieldset class="gender-field"><legend>Как к тебе обращаться?</legend><p class="choice-note">Так мы сможем обращаться к тебе естественно и уважительно.</p><div class="choices"><label><input name="gender" type="radio" value="woman" required> Женщина</label><label><input name="gender" type="radio" value="man"> Мужчина</label><label><input name="gender" type="radio" value="neutral"> Другой вариант / без указания пола</label></div></fieldset>
 <fieldset><legend>1. Что привело тебя на эту проверку? Можно выбрать несколько.</legend><div class="choices">
 <label><input name="concern" type="checkbox" value="abdomen"/> Живот выступает вперёд</label>
 <label><input name="concern" type="checkbox" value="pain"/> Боль или дискомфорт в пояснице</label>
@@ -242,7 +284,7 @@
 <label><input name="concern" type="checkbox" value="other"/> Другое</label>
 </div><p class="choice-note">Пожалуйста, отметь хотя бы один вариант.</p>
 <input aria-label="Другой запрос" id="otherConcern" maxlength="160" placeholder="Если выбрано «Другое», напиши в двух словах (необязательно)" type="text">
-<div class="clarifier" hidden="" id="priorityBox"><strong>Ты отметил(а) несколько причин. Какая сейчас главная?</strong><div class="choices" id="priorityChoices"></div></div></input></fieldset>
+<div class="clarifier" hidden="" id="priorityBox"><strong>Сейчас выбрано несколько причин. Какая важнее остальных?</strong><div class="choices" id="priorityChoices"></div></div></input></fieldset>
 <fieldset><legend>2. Говорил ли врач или профильный специалист, что у тебя гиперлордоз?</legend><div class="choices">
 <label><input name="diagnosed" required="" type="radio" value="yes"/> Да</label>
 <label><input name="diagnosed" type="radio" value="no"/> Нет</label>
@@ -251,7 +293,7 @@
 <fieldset><legend>3. Кажется ли тебе, что прогиб в пояснице выражен?</legend><div class="choices">
 <label><input name="curve" required="" type="radio" value="yes"/> Да</label>
 <label><input name="curve" type="radio" value="no"/> Нет</label>
-<label><input name="curve" type="radio" value="unsure"/> Не уверена / не уверен</label>
+<label><input name="curve" type="radio" value="unsure"/> Сложно сказать</label>
 </div></fieldset>
 <fieldset><legend>4. Есть ли у тебя сейчас боль или дискомфорт в пояснице?</legend><div class="choices">
 <label><input name="pain" required="" type="radio" value="none"/> Нет</label>
@@ -269,11 +311,11 @@
 <fieldset><legend>6. Есть ли тревожные симптомы: новая слабость в ногах, онемение в области промежности, нарушение контроля мочеиспускания или стула, либо сильная боль после травмы?</legend><div class="choices">
 <label><input name="redflags" required="" type="radio" value="yes"/> Да</label>
 <label><input name="redflags" type="radio" value="no"/> Нет</label>
-<label><input name="redflags" type="radio" value="unsure"/> Не уверена / не уверен</label>
+<label><input name="redflags" type="radio" value="unsure"/> Сложно сказать</label>
 </div><div class="clarifier" hidden="" id="flagClarifier">
-<strong>Ты ответил(а) «Не уверен(а)». Это нормально, давай уточним:</strong>
+<strong>Если ответить сложно, уточни:</strong>
 <div class="choices">
-<label><input name="flagClarify" type="radio" value="notnoticed"/> Я никогда не замечал(а) этих симптомов</label>
+<label><input name="flagClarify" type="radio" value="notnoticed"/> Я не замечаю перечисленных симптомов</label>
 <label><input name="flagClarify" type="radio" value="unclear"/> Я не понимаю, как их распознать</label>
 <label><input name="flagClarify" type="radio" value="possible"/> Похоже, что-то из перечисленного бывает</label>
 </div><p class="choice-note">Это помогает не путать отсутствие наблюдений с наличием симптомов.</p>
@@ -281,12 +323,12 @@
 <fieldset><legend>7. Замечаешь ли ты, что живот выступает вперёд в обычной расслабленной стойке?</legend><div class="choices">
 <label><input name="abdomenAppearance" required="" type="radio" value="yes"/> Да</label>
 <label><input name="abdomenAppearance" type="radio" value="no"/> Нет</label>
-<label><input name="abdomenAppearance" type="radio" value="unsure"/> Не уверена / не уверен</label>
+<label><input name="abdomenAppearance" type="radio" value="unsure"/> Сложно сказать</label>
 </div></fieldset>
 </form>
-<p class="quiz-progress" id="surveyProgress">Ответов: 0 из 7.</p>
+<p class="quiz-progress" id="surveyProgress">Ответов: 0 из 8.</p>
 </section>
-  <div class="photo-confirm"><label class="confirm"><input id="views" type="checkbox"> <span>Я проверил(а), что <b>на всех трёх фотографиях человек виден в полный рост, от головы до стоп</b>, и что ракурсы соответствуют подписям. MediaPipe пока не умеет надёжно отличать снимок спереди от снимка сзади.</span></input></label></div>
+  <div class="photo-confirm"><label class="confirm"><input id="views" type="checkbox"> <span>Я подтверждаю, что <b>на всех трёх фотографиях человек виден в полный рост, от головы до стоп</b>, и что ракурсы соответствуют подписям. Алгоритм проверяет ракурс автоматически, но возможны ошибки. Неверные фотографии могут исказить карту.</span></input></label></div>
   <p class="entry-help" id="questionStepHint" aria-live="polite">Ответь на все вопросы и подтверди ракурсы фотографий.</p>
 </section>
   <div class="entry-nav"><button type="button" id="intakePrev" class="entry-prev" hidden>← Назад</button><button type="button" id="check">Начать →</button></div>
@@ -295,14 +337,16 @@
   <div id="result" role="status" aria-live="polite"></div>
 </main>
 <script type="module">
-  // Simple vector examples; no extra image hosting and no patient photographs.
+  // Inline SVG references. Clear face vs nape, front vs back shoulders, profile with nose.
   function photoGuideHTML(){
-    const common='fill="#e3eee9" stroke="#176a54" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"';
-    const front=`<circle cx="75" cy="27" r="15" ${common}/><path d="M61 45 Q49 47 43 58 L35 96 Q34 103 40 105 Q45 106 47 98 L54 70 L52 131 L98 131 L96 70 L103 98 Q105 106 111 105 Q116 103 115 96 L107 58 Q101 47 89 45 Z" ${common}/><path d="M58 131 L58 202 Q58 208 66 208 L72 208 L75 143 L78 208 L85 208 Q92 208 92 201 L92 131Z" ${common}/><path d="M54 132 L98 132" fill="none" stroke="#176a54" stroke-width="2"/><path d="M65 26 H67 M83 26 H85" stroke="#176a54" stroke-width="2"/>`;
-    const back=`<circle cx="75" cy="27" r="15" ${common}/><path d="M61 45 Q49 47 43 58 L35 96 Q34 103 40 105 Q45 106 47 98 L54 70 L52 131 L98 131 L96 70 L103 98 Q105 106 111 105 Q116 103 115 96 L107 58 Q101 47 89 45 Z" ${common}/><path d="M58 131 L58 202 Q58 208 66 208 L72 208 L75 143 L78 208 L85 208 Q92 208 92 201 L92 131Z" ${common}/><path d="M75 46 L75 130 M59 70 Q75 82 91 70" fill="none" stroke="#176a54" stroke-width="2" stroke-dasharray="3 5"/>`;
-    const side=`<path d="M76 12 Q61 14 59 28 Q58 33 60 38 L53 41 L61 46 L64 52 Q69 57 77 55 L81 49 Q83 41 82 29 Q84 18 76 12Z" ${common}/><path d="M76 56 Q90 54 94 67 L98 108 Q105 123 99 137 L87 142 L83 115 L73 124 L69 108 L70 78 L67 66 Q67 58 76 56Z" ${common}/><path d="M83 141 Q87 165 82 198 L83 206 L65 208 Q61 208 64 204 L74 199 L74 150 L70 188 L69 203 L50 207 Q47 207 49 203 L62 199 L61 137Z" ${common}/><path d="M71 72 Q60 88 64 106 L66 118" fill="none" stroke="#176a54" stroke-width="4"/>`;
-    const art=(which,shape,label,note)=>`<div class="pose-example"><svg aria-hidden="true" viewBox="0 0 150 222" xmlns="http://www.w3.org/2000/svg"><rect x="9" y="5" width="132" height="210" rx="14" fill="#f5faf7" stroke="#cbded3" stroke-dasharray="4 6"/><g>${shape}</g><path d="M31 211 H119" stroke="#9dbaad" stroke-width="2"/></svg><strong>${label}</strong><span>${note}</span></div>`;
-    return `<section class="photo-examples" aria-label="Примеры подходящих снимков"><h3>Вот какие фотографии нам нужны</h3><p class="explain">Один человек, полностью в кадре, стоит спокойно. Сравни с этими примерами перед загрузкой.</p><div class="pose-examples">${art('side',side,'Сбоку','Строго профиль')}${art('front',front,'Спереди','Лицо к камере')}${art('back',back,'Сзади','Спина к камере')}</div><ul class="photo-tips"><li>На каждой фотографии видны <b>голова и обе стопы</b>.</li><li>Камера примерно на уровне талии, не наклонена.</li><li>Хороший свет, один человек, руки опущены, одежда не скрывает контуры тела.</li></ul></section>`;
+    const FILL='fill="#e7f1ec" stroke="#14634d" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"';
+    const limbs=`<path d="M56 119 L54 166 L53 196 Q51 205 59 205 L68 205 L73 143 L78 205 L90 205 Q98 205 96 195 L94 166 L93 119" ${FILL}/><path d="M58 202 Q55 211 65 211 L73 211 M80 211 L91 211 Q98 211 96 202" fill="none" stroke="#14634d" stroke-width="2"/>`;
+    const trunk=`<path d="M60 45 Q46 47 41 62 L35 100 Q32 110 38 113 Q43 116 47 106 L52 79 L51 119 L98 119 L97 79 L104 106 Q109 116 114 112 Q120 108 116 99 L109 63 Q103 49 91 45 Z" ${FILL}/>`;
+    const front=`<ellipse cx="75" cy="25" rx="17" ry="20" ${FILL}/>${trunk}${limbs}<g fill="#125b48"><circle cx="69" cy="24" r="2.2"/><circle cx="81" cy="24" r="2.2"/></g><path d="M72 30 Q75 34 78 30 M66 18 L71 17 M79 17 L84 18" fill="none" stroke="#14634d" stroke-width="1.8" stroke-linecap="round"/><path d="M65 52 Q75 61 85 52" fill="none" stroke="#90baa7" stroke-width="2"/>`;
+    const back=`<ellipse cx="75" cy="25" rx="17" ry="20" ${FILL}/><path d="M60 18 Q62 5 75 5 Q89 5 92 18 L88 31 Q85 38 75 39 Q65 38 62 31Z" fill="#c4dfd0" stroke="#14634d" stroke-width="1.6"/>${trunk}${limbs}<path d="M75 46 L75 116" stroke="#528e75" stroke-dasharray="3 5" stroke-width="2"/><path d="M58 67 Q67 76 72 68 M92 67 Q83 76 78 68" fill="none" stroke="#528e75" stroke-width="2"/><path d="M66 44 Q75 50 84 44" fill="none" stroke="#528e75" stroke-width="1.7"/>`;
+    const side=`<path d="M76 8 Q63 8 60 21 Q59 30 60 32 L54 36 L62 40 L65 47 Q73 53 81 46 L84 27 Q86 12 76 8Z" ${FILL}/><circle cx="65" cy="27" r="2.1" fill="#125b48"/><path d="M77 29 Q82 30 81 35" stroke="#3b856a" fill="none" stroke-width="1.6"/><path d="M75 51 Q93 49 98 64 L98 92 Q95 106 99 119 Q104 136 97 143 L83 143 L76 122 L70 114 L70 80 L66 67 Q65 55 75 51Z" ${FILL}/><path d="M69 65 Q61 83 65 98 L67 113" fill="none" stroke="#14634d" stroke-width="3"/><path d="M83 142 L84 196 Q85 204 76 205 L57 208 Q50 209 52 204 L68 198 L69 146 L66 196 L51 201 Q44 204 47 209 L64 209 Q77 209 77 203 L78 143Z" ${FILL}/>`;
+    const art=(shape,label,note)=>`<div class="pose-example"><svg role="img" aria-label="Схема: ${label}" viewBox="0 0 150 222" xmlns="http://www.w3.org/2000/svg"><rect x="9" y="5" width="132" height="210" rx="14" fill="#f5faf7" stroke="#cbded3" stroke-dasharray="4 6"/>${shape}<path d="M25 212 H125" stroke="#9dbaad" stroke-width="2"/></svg><strong>${label}</strong><span>${note}</span></div>`;
+    return `<section class="photo-examples" aria-label="Примеры правильных ракурсов"><h3>Вот как сфотографироваться</h3><p class="explain">Посмотри на голову и плечи на каждом рисунке: это <b>три разных ракурса</b>, их нельзя менять местами.</p><div class="pose-examples">${art(side,'СБОКУ','Один глаз, нос в профиль')}${art(front,'СПЕРЕДИ','Видны глаза и лицо')}${art(back,'СЗАДИ','Затылок и спина')}</div><ul class="photo-tips"><li><b>Полный рост:</b> голова и обе стопы в кадре.</li><li><b>Камера:</b> примерно на уровне талии, без наклона.</li><li><b>Условия:</b> один человек, ровный свет, руки вдоль тела, фон без помех.</li></ul></section>`;
   }
   document.getElementById('photoGuideTop').innerHTML=photoGuideHTML();
   const slots=["side","front","back"];
@@ -310,7 +354,7 @@
   const MAX_SIZE=12*1024*1024;
   const button=document.getElementById("check"), resultBox=document.getElementById("result"), views=document.getElementById("views");
   const survey=document.getElementById("survey"),surveyProgress=document.getElementById("surveyProgress");
-  const surveyFields=["diagnosed","curve","pain","bloating","redflags","abdomenAppearance"];
+  const surveyFields=["gender","diagnosed","curve","pain","bloating","redflags","abdomenAppearance"];
   const readAnswers=()=>({
     ...Object.fromEntries(surveyFields.map(k=>[k,survey.querySelector(`input[name="${k}"]:checked`)?.value??null])),
     concerns:Array.from(survey.querySelectorAll('input[name="concern"]:checked')).map(el=>el.value),
@@ -319,6 +363,10 @@
     flagClarify:survey.querySelector('input[name="flagClarify"]:checked')?.value??null,
     painClarify:survey.querySelector('input[name="painClarify"]:checked')?.value??null
   });
+  function genderVerb(woman,man,neutral='указано'){
+    const gender=readAnswers().gender;
+    return gender==='woman'?woman:gender==='man'?man:neutral;
+  }
   const concernLabels={abdomen:"выступающий живот",pain:"боль или дискомфорт в пояснице",curve:"выраженный поясничный прогиб",neckPain:"боль или дискомфорт в шее",shoulderPain:"боль или дискомфорт в плечах",slouch:"сутулость или плечи вперёд",backGeneralPain:"боль или дискомфорт в спине",general:"осанка в целом",other:"другая цель"};
   function updateConditionalFields(){
     const a=readAnswers();
@@ -337,7 +385,7 @@
   }
   function updateSurveyProgress(){
     updateConditionalFields();const a=readAnswers();
-    surveyProgress.textContent=`Ответов: ${surveyFields.filter(k=>a[k]).length+(a.concerns.length>0?1:0)} из 7.`;
+    surveyProgress.textContent=`Ответов: ${surveyFields.filter(k=>a[k]).length+(a.concerns.length>0?1:0)} из 8.`;
     clearResult();updateButton();
   }
   survey.addEventListener('change',(e)=>{
@@ -452,21 +500,26 @@
     }catch(e){console.warn('Face detection error:',e);return null;}
   }
   function estimatedView(lm,source){
-    const l=lm?.[11],r=lm?.[12],a=lm?.[23],b=lm?.[24];
-    if(!l||!r||!a||!b||Math.min(l.visibility??0,r.visibility??0)<.35)return 'unknown';
-    const torso=Math.abs((l.y+r.y-a.y-b.y)/2)*source.height;
-    if(torso<source.height*.1)return 'unknown';
-    const ratio=Math.abs(l.x-r.x)*source.width/torso;
-    return ratio>.78?'frontlike':ratio<.18?'sidelike':'unknown';
+    const ls=lm?.[11],rs=lm?.[12],lh=lm?.[23],rh=lm?.[24];
+    if(!ls||!rs||!lh||!rh)return {kind:'unknown',ratio:null};
+    const torso=Math.abs((ls.y+rs.y-lh.y-rh.y)/2)*source.height;
+    const shoulders=Math.abs(ls.x-rs.x)*source.width;
+    if(torso<source.height*.095||Math.min(ls.visibility??0,rs.visibility??0)<.38)return {kind:'unknown',ratio:null};
+    const ratio=shoulders/torso;
+    // Empirical heuristics, not a trained camera-angle classifier. Treat border cases as uncertain.
+    return {kind:ratio>=.48?'frontlike':ratio<=.30?'sidelike':'unknown',ratio};
   }
-  function viewAssessment(id,poseShape,face){
-    if(id==='back'&&face?.found)return {status:'invalid',message:'На снимке «Сзади» обнаружено лицо. Скорее всего, это вид спереди. Пожалуйста, замени фотографию.'};
-    if(id==='side'&&poseShape==='frontlike')return {status:'invalid',message:'На снимке «Сбоку» плечи расположены как при виде спереди или сзади. Нужен строгий профиль — попробуй переснять.'};
-    if((id==='front'||id==='back')&&poseShape==='sidelike')return {status:'uncertain',message:'Расположение плеч похоже на поворот боком. Проверь, что выбран нужный ракурс.'};
-    if(id==='front'&&face&&!face.found)return {status:'uncertain',message:'Не удалось подтвердить лицо на фронтальном снимке. Проверь ракурс и освещение.'};
-    if(id==='back'&&!face)return {status:'uncertain',message:'Автоматическая проверка лица недоступна. Сравни фото с примером «Сзади».'};
-    if(id==='front'&&!face)return {status:'uncertain',message:'Автоматическая проверка ракурса недоступна. Сравни фото с примером «Спереди».'};
-    return {status:'ok',message:id==='side'?'Положение тела похоже на профиль.':id==='front'?'Лицо обнаружено, ракурс выглядит подходящим.':'На снимке сзади лицо не обнаружено.'};
+  function viewAssessment(id,pose,face){
+    const shape=pose.kind;
+    // Strong evidence of a swapped angle: block, request a new shot.
+    if(id==='side'&&shape==='frontlike')return {status:'invalid',message:'Вместо профиля человек выглядит развёрнутым к камере или спиной к ней. Нужен снимок строго сбоку.'};
+    if((id==='front'||id==='back')&&shape==='sidelike')return {status:'invalid',message:`В кадре «${names[id]}» человек стоит почти боком. Нужен ${id==='front'?'вид лицом':'вид спиной'} к камере.`};
+    if(id==='back'&&face?.found)return {status:'invalid',message:'На фотографии «Сзади» распознано лицо. Похоже, перепутаны виды спереди и сзади.'};
+    if(id==='front'&&face&&!face.found)return {status:'uncertain',message:'Лицо спереди не удалось уверенно распознать. Проверь освещение, положение лица и подпись фотографии.'};
+    if(id==='side'&&shape==='unknown')return {status:'uncertain',message:'По линиям плеч не удалось уверенно проверить профиль. Убедись, что стоишь строго боком.'};
+    if(id==='front'&&!face)return {status:'uncertain',message:'Проверка лица сейчас недоступна. Посмотри, действительно ли видны оба глаза и лицо.'};
+    if(id==='back'&&!face)return {status:'uncertain',message:'Автоматическая проверка лица сейчас недоступна. Убедись, что видна спина, а не лицо.'};
+    return {status:'ok',message:id==='side'?'Ракурс похож на профиль.':id==='front'?'Ракурс спереди выглядит подходящим.':'Ракурс сзади выглядит подходящим.'};
   }
   async function loadSource(id){
     const img=new Image();img.src=urls.get(id);await img.decode();
@@ -552,9 +605,9 @@
     const points=samples.map(p=>({x:(p.x*source.width-x0)/(x1-x0)*out.width,y:(p.y*source.height-y0)/(y1-y0)*out.height})).filter(p=>p.x>=0&&p.y>=0&&p.x<=out.width&&p.y<=out.height);
     if(points.length<14)return null;
     const trace=()=>{ctx.beginPath();points.forEach((p,i)=>{if(i===0)ctx.moveTo(p.x,p.y);else ctx.lineTo(p.x,p.y);});};
-    trace();ctx.strokeStyle='rgba(255,255,255,.95)';ctx.lineWidth=8;ctx.stroke();
-    trace();ctx.strokeStyle='#e58e30';ctx.lineWidth=4;ctx.stroke();
-    return {image:out.toDataURL('image/png'),note:'Оранжевая линия следует внешнему силуэту поясницы и таза. Она помогает рассмотреть очертания спины, но не измеряет позвонки, угол лордоза или наклон костей таза.'};
+    trace();ctx.strokeStyle='rgba(255,255,255,.95)';ctx.lineWidth=9;ctx.stroke();
+    trace();ctx.strokeStyle='#e0272d';ctx.lineWidth=5;ctx.stroke();
+    return {image:out.toDataURL('image/png'),note:'Красная линия выделяет форму спины и переход от талии к тазу на твоём снимке. По ней удобно сравнивать стойку на фотографиях, сделанных в одинаковых условиях.'};
   }
   // Пробные измерения в плоскости фото, не оценка заболевания и не клинические нормы.
   function confident(lm,i){
@@ -614,204 +667,222 @@
     const a=add('a',label,parent);a.href=url;a.target='_blank';a.rel='noopener noreferrer';a.className='cta';return a;
   }
   function renderReportWizard(parent,metrics,photoOk,report,measurements,backContour){
-    const a=readAnswers(),selected=a.concerns,priority=selected.length>1?a.primary:selected[0];
-    const label={abdomen:'форма живота',curve:'поясничный прогиб',pain:'дискомфорт в пояснице',neckPain:'боль или дискомфорт в шее',shoulderPain:'боль или дискомфорт в плечах',slouch:'сутулость и положение плеч',backGeneralPain:'дискомфорт в спине',general:'осанка',other:'твой вопрос'};
-    const abdominal=selected.includes('abdomen')||a.abdomenAppearance==='yes';
-    const lumbar=selected.includes('curve')||a.curve==='yes'||a.diagnosed==='yes';
-    const backPain=selected.includes('pain')||a.pain!=='none';
-    const neckPain=selected.includes('neckPain');
-    const shoulderPain=selected.includes('shoulderPain');
-    const slouch=selected.includes('slouch');
-    const backGeneralPain=selected.includes('backGeneralPain');
-    const upper=neckPain||shoulderPain||slouch||backGeneralPain;
+    const a=readAnswers();
+    const selected=a.concerns,priority=selected.length>1?a.primary:selected[0];
+    const woman=a.gender==='woman',man=a.gender==='man';
+    const said=(f,m,n)=>woman?f:man?m:n;
+    const originalName={abdomen:'форма живота',pain:'комфорт поясницы',curve:'поясничный прогиб',neckPain:'шея',shoulderPain:'плечи',slouch:'сутулость и положение плеч',backGeneralPain:'общий комфорт спины',general:'осанка в целом',other:a.other||'твоя цель'};
+    const label=originalName[priority]||'твоя осанка';
+    const has=(x)=>selected.includes(x);
+    const abdominal=has('abdomen')||a.abdomenAppearance==='yes';
+    const lumbar=has('curve')||a.curve==='yes'||a.diagnosed==='yes';
+    const backPain=has('pain')||a.pain!=='none';
+    const upper=has('neckPain')||has('shoulderPain')||has('slouch');
+    const generalPain=has('backGeneralPain');
     const danger=a.redflags==='yes'||(a.redflags==='unsure'&&a.flagClarify==='possible');
     const unclear=a.redflags==='unsure'&&a.flagClarify==='unclear';
-    const painSevere=a.pain==='often'&&a.painClarify==='severe';
-    const serious=danger||painSevere;
+    const severe=a.pain==='often'&&a.painClarify==='severe';
+    const serious=danger||severe;
     const generalCourse=['neckPain','shoulderPain','slouch','backGeneralPain','general'].includes(priority)||(priority==='other'&&!abdominal&&!lumbar&&!backPain);
     const chosen=generalCourse?'Espalda Sana y Cuello Sin Dolor':'Panza Hacia Adentro: Espalda Sin Dolor';
     const chosenUrl=generalCourse?'https://espalda.online/products/espalda-sana-y-cuello-sin-dolor':'https://espalda.online/products/hiperlordosis';
-    // Accessible alternate action: the user can return to source form anytime.
+    const angleFront=metrics.front,angleBack=metrics.back,side=metrics.side;
+    const shoulderLooksEven=angleFront!==null&&angleBack!==null&&angleFront<=3&&angleBack<=3;
+    const shoulderDiffer=angleFront!==null&&angleFront>=5||angleBack!==null&&angleBack>=5;
+    const headShift=side&&side.earShoulder>=8;
+    const trunkShift=side&&side.shoulderHip>=8;
+
     const toolbar=document.createElement('div');toolbar.className='report-toolbar';parent.append(toolbar);
     add('strong','Твоя персональная карта спины',toolbar);
     const edit=add('button','↩ Изменить фото или ответы',toolbar);edit.type='button';
-    edit.addEventListener('click',()=>{parent.style.display='none';showIntake(2);});
+    edit.onclick=()=>{parent.style.display='none';showIntake(2);};
     const wizard=document.createElement('div');wizard.className='report-wizard';parent.append(wizard);
     const top=document.createElement('div');top.className='wizard-top';wizard.append(top);
-    add('span','ТВОЯ ПЕРСОНАЛЬНАЯ КАРТА СПИНЫ',top).className='wizard-count';
+    add('span','ПЕРСОНАЛЬНЫЙ РАЗБОР',top).className='wizard-count';
     const counter=add('span','',top);counter.className='wizard-count';
     const progress=document.createElement('div');progress.className='wizard-progress';wizard.append(progress);
     const bar=document.createElement('div');bar.className='wizard-bar';progress.append(bar);
     const pages=[];
-    const page=(title,tagline)=>{
+    function page(title,kicker){
       const panel=document.createElement('section');panel.className='wizard-panel';panel.hidden=true;
-      add('span',tagline,panel).className='pill';add('h2',title,panel);wizard.append(panel);pages.push(panel);return panel;
-    };
-    const insight=(parent,heading,body,type='subtle')=>{
-      const block=reportSection(parent,heading,'insight '+type);
-      if(Array.isArray(body))reportList(block,body);else paragraph(block,body);
-      return block;
-    };
-    const positive=[];
-    if(photoOk)positive.push('На всех трёх снимках удалось распознать основные ориентиры тела. Это значит, что фотографии подходят для первичного визуального сравнения.');
-    if(metrics.front!==null&&metrics.back!==null&&metrics.front<=3&&metrics.back<=3){
-      positive.push(`На двух ракурсах линия плеч расположена близко к горизонтали кадра: спереди около ${metrics.front}°, сзади около ${metrics.back}°. Это согласованное наблюдение, которое удобно сохранить для будущего сравнения.`);
-    }else if(metrics.front!==null&&metrics.front<=3)positive.push(`Спереди линия плеч выглядит почти горизонтальной: около ${metrics.front}° относительно кадра.`);
-    else if(metrics.back!==null&&metrics.back<=3)positive.push(`Сзади линия плеч выглядит почти горизонтальной: около ${metrics.back}° относительно кадра.`);
-    const watch=[];
-    if(metrics.side){
-      if(metrics.side.earShoulder>=8)watch.push(`На боковом снимке положение головы и плеч различается: проекции уха и плеча разнесены примерно на ${metrics.side.earShoulder}% высоты корпуса. ${metrics.side.earAhead?'Ухо находится ближе к направлению взгляда, чем плечо.':'Ухо находится позади вертикали плеча на снимке.'} Это помогает описать стойку на этом кадре, но не говорит о заболевании.`);
-      else watch.push('На боковом снимке ухо и плечо расположены сравнительно близко по горизонтали; положение головы можно сопоставлять с будущими снимками.');
-      if(metrics.side.shoulderHip>=8)watch.push(`Сбоку плечо и тазобедренная область находятся на разных вертикалях (около ${metrics.side.shoulderHip}% высоты корпуса). На это влияют стойка и угол съёмки.`);
+      add('span',kicker,panel).className='pill';add('h2',title,panel);wizard.append(panel);pages.push(panel);return panel;
     }
-    for(const direction of ['front','back'])if(metrics[direction]!==null&&metrics[direction]>3){
-      watch.push(`На снимке ${direction==='front'?'спереди':'сзади'} линия плеч немного наклонена относительно кадра (около ${metrics[direction]}°). Это может зависеть от стойки или положения камеры.`);
+    function paragraphOf(parent,txt,cls){return paragraph(parent,txt,cls||'');}
+    function titleBlock(parent,heading,body,cls='report-group'){
+      const section=reportSection(parent,heading,cls);paragraph(section,body);return section;
     }
-    if(backContour)watch.push('На фотографии сбоку выделена линия внешнего контура в области талии и поясницы. По ней видно, как меняется очертание корпуса, но это не угол изгиба позвоночника.');
-    const concerns=selected.map(k=>k==='other'&&a.other?`другое: ${a.other}`:concernLabels[k]);
+    function signal(parent,heading,body){const b=reportSection(parent,'','report-signal');add('strong',heading,b);paragraph(b,body);return b;}
+    function card(parent,i,title,body){const b=reportSection(parent,'','report-card');add('span',String(i),b).className='card-index';add('h3',title,b);paragraph(b,body);return b;}
+    function group(parent,heading,fact,why,action){
+      const b=reportSection(parent,heading,'report-group');
+      paragraph(b,fact,'fact');paragraph(b,why,'why');
+      const actionP=paragraph(b,'Практический вывод: '+action,'next');return b;
+    }
+    const smallNote='* Это наблюдения по обычным фотографиям, не медицинское заключение. На форму силуэта влияют положение тела, телосложение, одежда и ракурс. При жалобах и перед новой нагрузкой при необходимости проконсультируйся со специалистом.';
 
-    // 1. Clean onboarding to the report, no large technical lists.
-    const one=page('Начнём с твоей задачи','ШАГ 1 · ЧТО ТЕБЯ БЕСПОКОИТ');
-    insight(one,'Твой главный запрос',`Главное, что тебя сейчас беспокоит: ${label[priority]||'осанка'}. Поэтому мы будем разбирать снимки прежде всего с учётом этой цели.`,'focus');
-    if(concerns.length>1)paragraph(one,`Ты также отметила/отметил: ${selected.filter(k=>k!==priority).map(k=>k==='other'&&a.other?`другое: ${a.other}`:concernLabels[k]).join(', ')}.`);
-    paragraph(one,'Ты уже сделал(а) самое важное: дал(а) конкретный запрос и фотографии в трёх ракурсах. Теперь мы можем не говорить об осанке вообще, а разобрать именно то, что тебя беспокоит.');
-    insight(one,'На что мы будем опираться',['Твои ощущения и цели из анкеты: то, что нельзя увидеть по снимку.','Ориентиры на фотографиях: линия плеч, взаимное положение головы и корпуса, внешний контур спины.','Совпадения и различия между этими наблюдениями: без попытки ставить диагноз.']);
-    insight(one,'Как устроен разбор','Сначала посмотрим на внешнее расположение частей тела, затем сопоставим эти наблюдения с твоими ощущениями и наметим разумный следующий шаг.');
+    // PAGE 1: meaningful summary rather than empty questions reprinted.
+    const one=page('Твоя карта начинается с главного','ШАГ 1 · ТВОЯ ЗАДАЧА');
+    paragraphOf(one,`Одна из важных тем в твоих ответах — ${label}. Начнём именно с неё, а затем посмотрим, связаны ли с ней другие отмеченные ощущения.`, 'report-lead');
+    const focus=reportSection(one,'Что мы сопоставили','report-group');
+    const givens=[];
+    if(lumbar)givens.push(a.diagnosed==='yes'?'Ранее специалист уже говорил о гиперлордозе: это важный контекст, который стоит сохранить.':'Ты хочешь разобраться с положением поясницы и её естественным изгибом.');
+    if(abdominal)givens.push(a.bloating==='yes'?'Ты замечаешь изменение живота в течение дня: кроме положения корпуса, есть повод отдельно наблюдать пищеварительные факторы.':'Форма живота волнует тебя в обычной стойке: мы посмотрим силуэт сбоку вместе с областью поясницы.');
+    if(a.pain==='sometimes')givens.push('Поясница беспокоит время от времени: важно понять, в каких ситуациях возникает дискомфорт.');
+    if(a.pain==='often')givens.push('Ты упоминаешь частую или сильную боль в пояснице: выбор нагрузки требует особого внимания.');
+    if(upper)givens.push('В запросе есть шея, плечи или сутулость: уделим внимание положению головы и плеч.');
+    if(generalPain)givens.push('Есть ощущения в спине за пределами поясницы: само положение тела не объясняет их причину, но помогает сформулировать вопросы для дальнейшей работы.');
+    if(!givens.length)givens.push('Ты хочешь получить понятную точку отсчёта для наблюдения за своей осанкой.');
+    reportList(focus,givens.slice(0,4));
+    const evidence=document.createElement('div');evidence.className='report-signals';one.append(evidence);
+    signal(evidence,'Данные от тебя','Что беспокоит, когда возникает дискомфорт и было ли ранее заключение специалиста.');
+    signal(evidence,'Данные со снимков','Положение головы и плеч, видимый контур корпуса и возможные различия между ракурсами.');
+    paragraphOf(one,'Дальше покажем наблюдения на твоих фотографиях. А в конце останется короткий план, который можно использовать самостоятельно, даже без покупки другого продукта.','report-muted');
 
-    // 2. Photo evidence, with numbers in optional technical disclosure.
-    const two=page('Что мы увидели на фотографиях','ШАГ 2 · ОСАНКА НА ФОТО');
-    if(positive.length)insight(two,'Что удалось отметить как положительное',positive,'focus');
-    else insight(two,'Что уже получилось','На трёх снимках удалось найти основные ориентиры тела. Это позволяет сравнивать их положение и повторять такие же фото позднее, чтобы наблюдать за стойкой.','focus');
-    if(watch.length)insight(two,'На что стоит обратить внимание',watch,'subtle');
-    if(!positive.length&&!watch.length)insight(two,'Нужны более подходящие снимки','Модель не получила достаточно устойчивых ориентиров для сравнения. Попробуй переснять фото при ровном освещении, полностью в кадре.');
+    // PAGE 2: visual proof with plain language and real contour red.
+    const two=page('Что можно заметить на твоих фото','ШАГ 2 · ВИЗУАЛЬНЫЙ РАЗБОР');
+    paragraphOf(two,'Вот что действительно удалось увидеть по трём ракурсам. Никаких «процентов болезни»: точные технические числа можно открыть отдельно.','report-lead');
+    const signs=document.createElement('div');signs.className='report-signals';two.append(signs);
+    if(shoulderLooksEven)signal(signs,'Линия плеч выглядит ровной','Спереди и сзади распознанные плечи находятся приблизительно на одном уровне относительно кадра. Это удобная точка отсчёта для повторного фото.');
+    else if(shoulderDiffer)signal(signs,'На снимках плечи стоят не совсем на одной линии','На одном из ракурсов линия плеч наклонена относительно кадра. Это заметная деталь для сравнения, но её величина зависит и от положения камеры.');
+    else signal(signs,'Положение плеч','Программа определила ориентиры плеч на снимках. Сейчас для уверенной оценки их уровня данных недостаточно.');
+    if(headShift)signal(signs,'Положение головы сбоку','На профильном кадре проекция уха отличается от линии плеча по горизонтали. Это показывает, как голова расположена относительно корпуса именно на этой фотографии.');
+    else if(side)signal(signs,'Голова и плечи сбоку','На профильном кадре ухо и плечо расположены относительно близко по горизонтали. Можно сохранить это наблюдение как исходную точку.');
+    else signal(signs,'Профильное положение','Отдельные ориентиры головы и плеч сбоку сейчас недостаточно уверенно распознаны для сравнения.');
+    if(trunkShift)titleBlock(two,'Плечи относительно таза','На боковом кадре вертикали плеча и тазобедренной области немного различаются. Это описывает положение корпуса в момент съёмки и может изменяться в разных стойках.');
     if(backContour){
-      const block=reportSection(two,'Посмотри на внешнюю линию поясницы','insight subtle');
-      paragraph(block,'На твоём настоящем снимке оранжевым обозначен внешний контур от нижней части спины к тазу. Сравни его с обычной фотографией: здесь можно заметить изгиб силуэта, но нельзя решить, увеличен ли изгиб позвоночника.');
-      const img=document.createElement('img');img.src=backContour.image;img.alt='Фото человека сбоку с выделенным внешним контуром поясницы';img.className='back-photo';block.append(img);
-      paragraph(block,backContour.note,'small-explain');
+      const back=reportSection(two,'Рассмотри линию своей поясницы','report-group');
+      paragraph(back,'Красным выделен внешний край спины в области талии и перехода к тазу на твоём собственном снимке. Здесь хорошо видно, что силуэт имеет изгиб. Это полезная визуальная точка отсчёта для наблюдения за стойкой.');
+      const img=document.createElement('img');img.src=backContour.image;img.alt='Боковой снимок с красной линией внешнего контура поясницы';img.className='back-photo';back.append(img);
+      paragraph(back,'Если захочешь сравнить форму силуэта позже, повтори снимок с той же высоты камеры, в такой же одежде и в расслабленной стойке.','report-muted');
     }
-    const details=document.createElement('details');two.append(details);
-    const summary=add('summary','Посмотреть точные измерения по фотографиям',details);
-    const inside=document.createElement('div');inside.className='details-inside';details.append(inside);
-    reportList(inside,measurements.length?measurements:['Недостаточно данных для числовых сравнений.']);
-    paragraph(inside,'Что значат цифры: проценты показывают расстояния между найденными точками относительно высоты корпуса, а градусы показывают наклон линии плеч относительно кадра. Это не проценты заболевания и не клинические нормы.');
+    if((lumbar||abdominal)&&backContour){
+      paragraphOf(two,'У поясницы есть естественный изгиб. Отмеченная линия показывает форму внешнего силуэта, но сама по себе не подтверждает гиперлордоз.*','report-footnote');
+    }
+    const tech=document.createElement('details');two.append(tech);
+    add('summary','Показать технические числа и метод измерения',tech);
+    const techBody=document.createElement('div');techBody.className='details-inside';tech.append(techBody);
+    reportList(techBody,measurements.length?measurements:['Надёжных числовых измерений по данным снимкам нет.']);
+    paragraph(techBody,'Проценты показывают геометрию точек на изображении относительно его размеров, а градусы — наклон линии плеч относительно фотографии. Это не шкала гиперлордоза.');
 
-    // 3. Friendly, grounded reconciliation of self-report and images.
-    const three=page('Что это значит для тебя','ШАГ 3 · ТВОИ ОЩУЩЕНИЯ');
-    if(a.diagnosed==='yes')insight(three,'О поясничном прогибе','Ты сообщил(а), что специалист раньше говорил тебе о гиперлордозе. Это полезная часть истории, но сегодняшние фото не проверяют степень изгиба.');
-    else if(lumbar)insight(three,'О поясничном прогибе',a.curve==='yes'?'Тебе кажется, что прогиб выражен. На боковой фотографии можно рассмотреть внешнюю линию поясницы, но она не показывает положение позвонков.':'Тебя интересует поясничный прогиб. Поясница в норме имеет естественный изгиб; по силуэту нельзя измерить его глубину.');
-    if(abdominal)insight(three,'О форме живота',a.bloating==='yes'?'Ты отметила/отметил выступающий живот и его изменения в течение дня. На форму влияют разные факторы, включая пищеварение и положение корпуса; один снимок не объясняет причину.':'Тебя интересует выступающий живот. Положение корпуса может менять то, как выглядит живот сбоку, но фотография сама по себе не показывает причину его формы.');
-    if(backPain){
-      const message=a.pain==='none'?'В анкете ты не сообщил(а) о боли сейчас. Это хороший ориентир для сравнения самочувствия позже.':a.pain==='sometimes'?'Ты сообщил(а) о периодическом умеренном дискомфорте в пояснице. На фото нельзя увидеть причину боли, но твои ощущения стоит учитывать при выборе нагрузки.':painSevere?'Ты указал(а), что боль сильная, новая или мешает движению. Прежде чем начинать занятия, обратись за очной медицинской оценкой.':'Ты сообщаешь, что дискомфорт повторяется часто. Обсуди его с врачом или физиотерапевтом, чтобы подобрать безопасную активность.';
-      insight(three,'О пояснице и самочувствии',message);
-    }
-    if(neckPain)insight(three,'О шее','Ты отметил(а) боль или дискомфорт в шее. По фотографии можно оценить взаимное положение головы и плеч, но нельзя установить причину боли или степень мышечного напряжения.');
-    if(shoulderPain)insight(three,'О плечах','Ты отметил(а) боль или дискомфорт в плечах. Мы можем описать линию плеч на снимках, однако её наклон не позволяет объяснить боль или оценить состояние суставов.');
-    if(slouch)insight(three,'О сутулости','Тебя беспокоит сутулость или положение плеч. Снимки помогают заметить привычное положение верхней части корпуса. Отдельная фотография не показывает, как тело двигается в течение дня.');
-    if(backGeneralPain)insight(three,'О дискомфорте в спине','Ты отметил(а) дискомфорт в спине не только в пояснице. По внешнему виду спины нельзя установить причину этих ощущений. Если боль сохраняется или ограничивает движения, стоит обсудить её со специалистом.');
-    if(!lumbar&&!abdominal&&!backPain&&!upper)insight(three,'О твоей осанке','Необязательно искать скрытую проблему. Можно использовать этот разбор как точку отсчёта, а дальше наблюдать за комфортом движений.');
-    if(lumbar||abdominal){
-      const notes=[];
-      if(a.curve==='yes')notes.push('Ты сам(а) замечаешь выраженный прогиб. Если это важно для тебя, полезнее сравнить несколько одинаково снятых фотографий во времени и при необходимости обсудить прогиб со специалистом, чем оценивать себя по одному ракурсу.');
-      if(a.bloating==='yes')notes.push('Ты указал(а), что живот меняется в течение дня. Значит, стоит отдельно наблюдать за пищеварением и временем появления изменений: одну только осанку считать причиной нельзя.');
-      if(a.abdomenAppearance==='yes'&&a.bloating!=='yes')notes.push('Ты отмечаешь выступающий живот в расслабленной стойке. Положение корпуса может влиять на силуэт; кроме того, на него влияют особенности строения и мягких тканей. По снимку нельзя определить долю каждого фактора.');
-      if(backContour)notes.push('На боковом кадре программа смогла обвести внешний контур поясницы. Это повод посмотреть на силуэт внимательнее, а не подтверждение гиперлордоза.');
-      if(notes.length)insight(three,'Что важно конкретно в твоём случае',notes,'focus');
-    }
-    if(a.pain==='none'&&(selected.includes('general')||selected.includes('slouch'))){
-      insight(three,'Сильная сторона твоей ситуации','Ты не сообщил(а) о боли в пояснице. Это полезная отправная точка: цель может состоять в комфорте движений и хороших привычках, а не в поиске болезни.','focus');
-    }
-    if(danger)insight(three,'Сначала важно уточнить симптомы','Ты отметил(а), что один из тревожных симптомов может присутствовать. Новая слабость ног, онемение промежности или проблемы с контролем мочеиспускания/стула требуют срочной помощи. Сильная боль после травмы также требует срочной оценки.','caution');
-    else if(unclear)insight(three,'Если вопрос о симптомах был непонятен','Если замечаешь необычную слабость в ногах, онемение промежности или изменения контроля мочеиспускания и стула, обратись за срочной медицинской помощью. Если не замечаешь, но сомневаешься, уточни у специалиста.','caution');
-    // No additional scary paragraph for «never noticed».
+    // PAGE 3: group by meaningful zones, never one near-identical card per checkbox.
+    const three=page('Как связать фото и твои ощущения','ШАГ 3 · ПЕРСОНАЛЬНОЕ ОБЪЯСНЕНИЕ');
+    paragraphOf(three,'Мы разделили твои ответы на несколько важных зон, чтобы понять, за чем стоит наблюдать в первую очередь.','report-lead');
+    const firstLumbar=['abdomen','curve','pain'].includes(priority),firstUpper=['neckPain','shoulderPain','slouch'].includes(priority);
+    const sections=[];
+    if(lumbar||abdominal||backPain)sections.push({key:'lumbar',name:'Поясница, таз и живот',run:()=>{
+      const prior=a.diagnosed==='yes'?(woman?'Ты указала, что специалист ранее упоминал гиперлордоз. ':man?'Ты указал, что специалист ранее упоминал гиперлордоз. ':'В ответах указано, что специалист ранее упоминал гиперлордоз. '):'';
+      const fact=prior+(backPain?(a.pain==='none'?'Боли в пояснице сейчас не отмечено. ':a.pain==='sometimes'?'Иногда возникает умеренный дискомфорт в пояснице. ':'Ты сообщаешь о частом или сильном дискомфорте в пояснице. '):'')+(abdominal?'Тебя интересует форма живота. ':'');
+      const why=(backContour?'На боковом снимке виден изгиб внешнего контура от талии к тазу. ':'На профильном снимке можно оценить общее положение корпуса. ')+(a.bloating==='yes'?'Ты также замечаешь изменения живота в течение дня, поэтому стоит наблюдать за ними отдельно от осанки.':'Изменение положения корпуса может менять внешний силуэт, но не обязательно является его основной причиной.');
+      const action=serious?'сначала выяснить безопасность нагрузок с врачом.':'отмечать ощущения после сидения, стояния и ходьбы; понаблюдать за комфортом движений таза и поясницы, не пытаясь силой выпрямить спину.';
+      group(three,'Поясница и форма живота',fact,why,action);
+    }});
+    if(upper)sections.push({key:'upper',name:'Шея, плечи и верх спины',run:()=>{
+      const topics=[has('neckPain')?'шея':null,has('shoulderPain')?'плечи':null,has('slouch')?'положение плеч':null].filter(Boolean).join(', ');
+      const fact='Твои ответы выделяют такие темы: '+topics+'.';
+      const why=(shoulderLooksEven?'Линия плеч на снимках выглядит достаточно ровной, но это не отменяет ощущения усталости и напряжения. ':shoulderDiffer?'На снимке заметен наклон линии плеч, и это можно отслеживать при повторных кадрах. ':'Измерение линии плеч пока ограничено. ')+(headShift?'В боковом профиле голова расположена не на одной вертикали с плечом.':'Для понимания комфорта важны не только статические фотографии, но и условия дня.');
+      const action='отмечать время появления напряжения (телефон, компьютер, длительное сидение); чаще менять положение и выбирать комфортные движения шеи, лопаток и грудного отдела.';
+      group(three,'Шея и плечи',fact,why,action);
+    }});
+    if(generalPain||has('general')||(!sections.length))sections.push({key:'general',name:'Спина в целом',run:()=>{
+      const fact=generalPain?'В анкете отмечен дискомфорт в спине за пределами поясницы.':'Ты хочешь лучше понимать свою осанку и ощущение комфорта в теле.';
+      const why='Фотографии показывают стойку в один момент времени. Для полноценного наблюдения полезнее соединить их с информацией о повседневной активности и ситуациях, когда спине комфортно или некомфортно.';
+      const action='вести короткие заметки о нагрузке и ощущениях, сохранять свободное разнообразие движений без поиска единственно правильной позы.';
+      group(three,'Комфорт спины',fact,why,action);
+    }});
+    // Priority zone goes first. Limit initial vertical burden when many concerns are checked.
+    sections.sort((x,y)=>((x.key===(firstLumbar?'lumbar':firstUpper?'upper':'general'))?-1:0)-((y.key===(firstLumbar?'lumbar':firstUpper?'upper':'general'))?-1:0));
+    sections.forEach(s=>s.run());
+    if(a.redflags==='unsure'&&a.flagClarify==='notnoticed')paragraphOf(three,'В ответах нет сообщений о замеченных тревожных симптомах. Это не повод тревожиться только из-за анкеты.','report-muted');
+    if(danger)titleBlock(three,'Важная проверка безопасности','В анкете отмечены возможные симптомы, требующие срочной медицинской оценки: новую слабость ног, онемение промежности или нарушения контроля мочеиспускания/стула. При таких признаках не откладывай помощь.','care-note urgent-care');
+    else if(severe)titleBlock(three,'Важно про выраженную боль','Если боль сильная, новая или ограничивает движение, сначала обратись за очной медицинской оценкой, прежде чем выбирать упражнения.','care-note');
+    else if(unclear)titleBlock(three,'Если вопрос о симптомах остался непонятен','Если появились необычная слабость ног, онемение промежности или изменение контроля мочеиспускания и стула, обратись за срочной помощью. Если подобных жалоб нет, но трудно разобраться в вопросе, можно уточнить его у специалиста.','care-note');
 
-    // 4. Advice tailored to stated priority; compact and useful.
-    const four=page('Что можно делать дальше','ШАГ 4 · НАПРАВЛЕНИЯ РАБОТЫ');
-    if(serious){
-      insight(four,'Первый шаг — медицинская оценка','Из-за указанных симптомов сейчас не стоит выбирать упражнения на основании онлайн-фотографий. Когда безопасность нагрузки будет понятна, можно вернуться к программе движений.','caution');
-    }else{
-      paragraph(four,'Если хочешь постепенно работать над осанкой, важнее регулярные комфортные движения, чем постоянная попытка держать спину «идеально ровно».');
-      const targets=generalCourse?[
-        'Мягкая подвижность шеи и грудного отдела без боли.',
-        'Контроль движений лопаток и плеч, развитие выносливости мышц верхней части корпуса.',
-        'Умеренная подвижность и укрепление мышц спины в комфортном диапазоне, разнообразие движений в течение дня.'
-      ]:[
-        'Комфортная подвижность таза и тазобедренных суставов.',
-        'Постепенное развитие контроля и выносливости мышц корпуса.',
-        'Посильное укрепление ягодиц и ног, разнообразие повседневных движений.'
-      ];
-      insight(four,'Направления, на которые стоит обратить внимание',targets,'focus');
-      if(backPain)paragraph(four,'Если боль повторяется или усиливается, выбирай нагрузку с учётом медицинских рекомендаций.');
-      if(abdominal)paragraph(four,'Изменение осанки не гарантирует плоский живот. На его форму влияют и другие факторы.');
-    }
+    // PAGE 4: a usable plan with visual cards, not a disguised sales ad.
+    const four=page('Твой небольшой план действий','ШАГ 4 · ЧТО МОЖНО СДЕЛАТЬ');
+    paragraphOf(four,serious?'Сейчас приоритет — безопасность. Пока причина выраженной боли или тревожных симптомов не уточнена, не используй онлайн-отчёт для самостоятельного подбора нагрузок.':'Вот три небольших действия, которые можно попробовать в ближайшие дни. Они помогут лучше понять, что влияет на ощущения и как подойти к регулярной работе с осанкой.','report-lead');
     if(!serious){
-      const practical=generalCourse?[
-        'Понаблюдай, когда сильнее устает шея: после телефона, компьютера или длительного сидения. Отметь, после какого занятия стало комфортнее.',
-        'Меняй положение тела в течение дня; нет необходимости постоянно удерживать плечи в одной зафиксированной позе.',
-        'Если планируешь занятия, начинай с комфортного уровня активности, ориентируясь на ощущения и медицинские рекомендации при наличии боли.'
+      const steps=document.createElement('div');steps.className='report-cards';four.append(steps);
+      if(generalCourse){
+        card(steps,1,'Отметь ситуации','В течение трёх дней замечай, когда устают шея или плечи: работа за компьютером, телефон, поездки или длительное сидение.');
+        card(steps,2,'Меняй положение','Периодически двигайся и меняй позу, не стараясь держать плечи в одном положении весь день. Отметь, что приносит комфорт.');
+        card(steps,3,'Сравни ощущения','Раздели самочувствие утром и вечером. Какие движения становятся легче, а какие усиливают неприятные ощущения?');
+      }else{
+        card(steps,1,'Создай точку отсчёта','Сохрани профильное фото. Для будущего сравнения снимайся при той же высоте камеры, освещении и привычной расслабленной стойке.');
+        card(steps,2,'Заметь закономерности','В течение трёх дней отмечай, что происходит с поясницей после сидения, стояния и прогулок, а при запросе на живот — меняется ли силуэт к вечеру.');
+        card(steps,3,'Сосредоточься на комфорте','Обрати внимание, какие обычные движения корпуса даются свободно. Не заставляй себя «выпрямлять» естественный поясничный изгиб.');
+      }
+      const axes=document.createElement('div');axes.className='report-group';four.append(axes);
+      add('h3','Какие направления занятий могут подойти',axes);
+      const dirs=generalCourse?[
+        'Комфортная подвижность шеи и грудного отдела.',
+        'Контроль движений лопаток и плеч.',
+        'Постепенное развитие выносливости мышц верхней части корпуса.'
       ]:[
-        'Сделай для себя точку отсчёта: сохрани снимок сбоку в естественной стойке и повтори его при похожем освещении и высоте камеры.',
-        'Отметь, когда беспокоит поясница: после стояния, сидения, ходьбы или физических нагрузок. Это поможет понять, какие ситуации требуют внимания.',
-        'Если планируешь упражнения, ориентируйся на постепенность и комфорт движения, а не на насильственное «выпрямление» естественного поясничного изгиба.'
+        'Мягкая подвижность таза и тазобедренных суставов.',
+        'Упражнения на контроль корпуса и согласованность движений.',
+        'Посильная работа над выносливостью мышц туловища, ягодиц и ног.'
       ];
-      insight(four,'Три простых ориентира для повседневной жизни',practical,'subtle');
+      reportList(axes,dirs);
+      paragraph(axes,'Это направления для знакомства с темой, а не назначение конкретных упражнений. Выбирай нагрузку с учётом самочувствия.','report-muted');
+    }else{
+      const steps=document.createElement('div');steps.className='report-cards';four.append(steps);
+      card(steps,1,'Уточни симптомы','При новых неврологических признаках нужна срочная помощь; при выраженной боли — медицинская оценка.');
+      card(steps,2,'Сохрани наблюдения','Возьми с собой сведения о времени появления боли и жалобах, которые уже были отмечены в анкете.');
+      card(steps,3,'Вернись к активности позже','Когда будет ясна допустимая нагрузка, можно обсуждать постепенные упражнения и программы для спины.');
     }
-    paragraph(four,'Это общие ориентиры, а не индивидуальное назначение упражнений.','small-explain');
+    paragraphOf(four,'Результаты этой карты полезно сохранять и сравнивать с собственными ощущениями, а не с «идеальной» осанкой из интернета.','report-footnote');
 
-    // 5. Summary, evidence, tailored course, direct correct landing page.
-    const five=page('Твой результат и следующий шаг','ШАГ 5 · ПЕРСОНАЛЬНЫЙ ИТОГ');
-    if(positive.length)insight(five,'Что у тебя выглядит благополучно на снимках',positive.slice(0,2),'focus');
-    else insight(five,'Что удалось проверить','Мы распознали основные ориентиры на трёх фотографиях и получили основу для будущего сравнения, хотя количественные выводы ограничены.','focus');
-    if(watch.length)insight(five,'На что стоит обратить внимание',watch.slice(0,3),'subtle');
-    else insight(five,'Выраженных различий в доступных измерениях не отмечено','Это не означает, что с осанкой «всё идеально» или что нет причин для твоих ощущений: фотографии показывают лишь часть информации.','subtle');
-    const goals=[];
-    if(abdominal)goals.push('внешний вид живота');
-    if(lumbar)goals.push('положение поясницы');
-    if(backPain)goals.push('дискомфорт в пояснице');
-    if(neckPain)goals.push('дискомфорт в шее');
-    if(shoulderPain)goals.push('дискомфорт в плечах');
-    if(slouch)goals.push('сутулость');
-    if(backGeneralPain)goals.push('дискомфорт в спине');
-    if(!goals.length)goals.push('комфорт и привычки осанки');
-    insight(five,'Твой персональный итог',`Ты пришёл/пришла с запросом на ${goals.join(', ')}. На снимках мы рассмотрели положение головы, плеч и корпуса, а также внешний контур поясничной области. Твои ответы помогают понять, что именно стоит отслеживать в жизни. Это карта наблюдений за собой и ориентир для дальнейшей работы, но не подтверждение конкретного диагноза.`, 'subtle');
+    // PAGE 5: a clear personalized synthesis and THEN program recommendation.
+    const five=page('Главный итог твоей карты','ШАГ 5 · РЕЗУЛЬТАТ И СЛЕДУЮЩИЙ ШАГ');
+    const finalSigns=document.createElement('div');finalSigns.className='report-signals';five.append(finalSigns);
+    signal(finalSigns,'Что удалось увидеть',shoulderLooksEven?'На двух ракурсах линия плеч выглядит примерно ровной; профиль поясницы и корпуса сохранён для будущего сравнения.':shoulderDiffer?'На снимке есть различие в высоте проекций плеч. Это наблюдение можно перепроверить при одинаковом положении камеры.':'Мы определили основные ориентиры тела на трёх ракурсах и рассмотрели общий силуэт корпуса.');
+    signal(finalSigns,'Что важно именно тебе',`Твой нынешний приоритет — ${label}. ${backPain?'В ответах есть информация о комфорте поясницы. ':''}${upper?'Также есть запрос по верхней части спины. ':''}Поэтому дальше имеет смысл выбирать практику исходя из твоих целей, а не только цифр со снимков.`);
+    const synthesis=reportSection(five,'К какому выводу мы пришли','report-group');
+    const combo=abdominal&&lumbar?'Ты одновременно интересуешься формой живота и положением поясницы. На снимке выделен внешний профиль нижней части спины; вместе с твоими наблюдениями это хорошая отправная точка для работы над привычками движения.':
+      upper&&generalCourse?'Главный запрос связан с шеей, плечами или общим состоянием спины. Разумнее сосредоточиться на комфортных движениях, подвижности и постепенной тренировке корпуса.':
+      backPain?'Тебя беспокоит спина. Важнее всего сочетать подходящую активность с отслеживанием ситуаций, в которых симптомы усиливаются или уменьшаются.':
+      'Теперь у тебя есть исходные фотографии и понятные ориентиры для наблюдения за своей осанкой и ощущениями.';
+    paragraph(synthesis,combo);
+    paragraph(synthesis,'Ты уже можешь использовать карту самостоятельно: вернуться к одинаково снятым фотографиям и коротким заметкам через несколько дней.','report-muted');
     const offer=reportSection(five,'','course-offer');
-    add('span','ПРОГРАММА ПО ТВОЕМУ ЗАПРОСУ',offer).className='pill';
+    add('span','ЕСЛИ ХОЧЕШЬ ПРОДОЛЖИТЬ',offer).className='pill';
     add('h3',chosen,offer);
     if(generalCourse){
-      paragraph(offer,`Твоя приоритетная тема — ${label[priority]||'комфорт спины'}. Поэтому логичнее начать знакомство с программой, посвящённой общей работе с осанкой, шеей, плечами и подвижностью спины. Занятия не заменяют выяснение причины боли у врача.`);
+      paragraph(offer,'Для запроса о шее, плечах, сутулости и общей подвижности спины можно рассмотреть Espalda Sana y Cuello Sin Dolor от Ирины Постура. Это системный формат регулярной практики, а не отдельные разрозненные упражнения.');
     }else{
-      paragraph(offer,`Твой главный запрос связан с темой «${label[priority]||'поясница'}». Поэтому можно рассмотреть систему Ирины для регулярной мягкой работы с движениями корпуса, контролем таза и поясничной области. Упражнения помогают развивать двигательные навыки, но не обещают устранить боль или изменить форму живота у всех.`);
-      paragraph(offer,'Это четырёхнедельная программа с двумя чередующимися практиками по 15 минут, пять занятий в неделю. После завершения к практике можно возвращаться, если она подходит по самочувствию.');
+      paragraph(offer,'Если твоя цель — регулярно уделять внимание положению таза, контролю корпуса и комфорту поясницы, можно рассмотреть Panza Hacia Adentro: Espalda Sin Dolor от Ирины Постура.');
+      paragraph(offer,'Программа рассчитана на четыре недели: две чередующиеся тренировки по 15 минут, пять занятий в неделю. К комфортной практике можно возвращаться и после первого месяца.');
     }
-    if(serious)paragraph(offer,'С учётом указанных симптомов сначала обратись за медицинской оценкой. О программе можно узнать сейчас, а решение о занятиях принять после неё.','small-explain');
-    else if(unclear)paragraph(offer,'Если ты сомневаешься в безопасности нагрузки, сначала обсуди это со специалистом.','small-explain');
-    simpleLink(offer,'Узнать подробнее о программе',chosenUrl);
-    const medical=reportSection(five,'Медицинское предупреждение','medical-end');
-    paragraph(medical,'Эта онлайн-проверка предназначена только для ознакомления и самонаблюдения. Это не профессиональная медицинская диагностика или консультация. Фото и анкета не позволяют устанавливать гиперлордоз, причины боли или назначать лечение. Измерения могут быть неточными. При симптомах или сомнениях в безопасности упражнений обратись к врачу или профильному специалисту.');
-    paragraph(medical,'Фотографии обрабатываются локально в браузере и не сохраняются на нашем сервере.');
+    if(serious)paragraph(offer,'При отмеченных тревожных симптомах или выраженной боли сначала необходимо получить медицинскую оценку безопасности занятий.','report-muted');
+    else if(unclear)paragraph(offer,'При сомнениях в безопасности нагрузки стоит уточнить их у профильного специалиста.','report-muted');
+    simpleLink(offer,'Посмотреть программу и содержание',chosenUrl);
+    const save=add('button','Сохранить карту как PDF / распечатать',five);
+    save.type='button';save.className='save-report';save.onclick=()=>window.print();
+    const med=reportSection(five,'Важная информация','medical-end');
+    paragraph(med,'Эта онлайн-проверка носит информационный характер и не является медицинской диагностикой. Визуальный изгиб спины и положение тела по обычным снимкам не позволяют подтвердить гиперлордоз или установить причину боли. При симптомах или сомнениях перед нагрузкой обратись к врачу или профильному специалисту.');
+    paragraph(med,'Снимки обрабатываются локально в браузере, на сервер не сохраняются.');
 
     const nav=document.createElement('div');nav.className='wizard-nav';wizard.append(nav);
     const prev=add('button','← Назад',nav);prev.type='button';prev.className='back';
     const next=add('button','Далее →',nav);next.type='button';
     let index=0;
     function show(i){
-      index=Math.min(pages.length-1,Math.max(0,i));
+      index=Math.max(0,Math.min(pages.length-1,i));
       pages.forEach((p,j)=>p.hidden=j!==index);
       counter.textContent=`ШАГ ${index+1} ИЗ ${pages.length}`;
-      bar.style.width=`${((index+1)/pages.length)*100}%`;
+      bar.style.width=`${100*(index+1)/pages.length}%`;
       prev.hidden=index===0;next.hidden=index===pages.length-1;
-      next.textContent='Далее →'; // Keep the label when navigating back from the last screen.
+      next.textContent='Далее →';
       parent.scrollIntoView({behavior:'smooth',block:'start'});
     }
-    prev.addEventListener('click',()=>show(index-1));
-    next.addEventListener('click',()=>show(index+1));
+    prev.onclick=()=>show(index-1);next.onclick=()=>show(index+1);
     show(0);
   }
   function add(tag,text,parent){const el=document.createElement(tag);el.textContent=text;parent.append(el);return el;}
   function renderReview(report,photoOk,metrics,measurements,contour,qa=[]){
     const root=document.getElementById('reviewSection');root.replaceChildren();root.hidden=false;
-    add('span','ПРОВЕРКА ЗАВЕРШЕНА',root).className='step-tag';
-    add('h2',photoOk?'Твои фотографии обработаны':'Некоторые фотографии нужно заменить',root);
+    add('span','ПРОВЕРКА РАКУРСОВ',root).className='step-tag';
+    add('h2',photoOk?'Три ракурса получены':'Некоторые фотографии нужно заменить',root);
     paragraph(root,photoOk?'Сначала посмотри, что удалось получить. Затем откроем твою персональную карту спины с объяснениями и рекомендациями.':'Прежде чем составить карту, важно получить три достаточно чёткие фотографии в полный рост.','review-sub');
     const invalid=qa.filter(x=>x.state==='invalid'),unknown=qa.filter(x=>x.state==='uncertain');
     if(!photoOk){
@@ -823,9 +894,24 @@
       const visual=document.createElement('div');visual.innerHTML=photoGuideHTML();root.append(visual);
     }else if(unknown.length){
       const note=document.createElement('div');note.className='review-warning';root.append(note);
-      paragraph(note,'Мы нашли человека на всех трёх фото, но некоторые ракурсы невозможно уверенно проверить автоматически. Сравни их с примерами ниже:');
+      paragraph(note,'Некоторые ракурсы требуют твоего подтверждения. Если фотография перепутана, итоговый разбор будет неточным:');
       const list=document.createElement('ul');note.append(list);
       unknown.forEach(x=>add('li',`«${names[x.id]}»: ${x.message}`,list));
+    }
+    // An invalid photo means no personalized report. Show just the affected shots and how to retake them.
+    if(!photoOk){
+      root.replaceChildren();
+      add('span','НУЖНО УТОЧНИТЬ ФОТО',root).className='step-tag';
+      add('h2','Некоторые фотографии не подходят',root);
+      paragraph(root,'Мы не будем составлять карту по перепутанным ракурсам: это может привести к неправильным выводам. Сверь снимки с образцами и замени неподходящие. Ответы анкеты сохранятся.','review-sub');
+      const errors=qa.filter(q=>q.state==='invalid');
+      const errorList=reportSection(root,'Что нужно исправить','quality-error');
+      reportList(errorList,errors.map(q=>`${names[q.id]}: ${q.message}`));
+      const diagram=document.createElement('div');diagram.innerHTML=photoGuideHTML();root.append(diagram);
+      const back=add('button','← Исправить фотографии',root);back.type='button';
+      back.onclick=()=>{root.hidden=true;showIntake(1)};
+      root.scrollIntoView({behavior:'smooth',block:'start'});
+      return;
     }
     const photos=document.createElement('div');photos.className='review-photos';root.append(photos);
     for(let i=0;i<slots.length;i++){
@@ -845,18 +931,19 @@
     const selected=a.concerns.map(k=>k==='other'&&a.other?a.other:concernLabels[k]);
     const primary=a.concerns.length>1?a.primary:a.concerns[0];
     const painLabel={none:'нет',sometimes:'иногда умеренный',often:'частый или сильный'};
-    const q=[`Что интересует: ${selected.join(', ')}.`,`Главный вопрос: ${concernLabels[primary]||'твой запрос'}.`,`Поясница: ${painLabel[a.pain]||'не указано'}.`,`Гиперлордоз ранее обсуждался со специалистом: ${a.diagnosed==='yes'?'да':a.diagnosed==='no'?'нет':'не знаю'}.`];
+    const q=[`Обращение: ${a.gender==='woman'?'женщина':a.gender==='man'?'мужчина':'без обращения по полу'}.`,`Что интересует: ${selected.join(', ')}.`,`Главный вопрос: ${concernLabels[primary]||'твой запрос'}.`,`Поясница: ${painLabel[a.pain]||'не указано'}.`,`Гиперлордоз ранее обсуждался со специалистом: ${a.diagnosed==='yes'?'да':a.diagnosed==='no'?'нет':'не знаю'}.`];
     reportList(summary,q);
     const all=document.createElement('details');all.className='review-full-answers';root.append(all);
-    add('summary','Посмотреть все 7 ответов',all);
+    add('summary','Посмотреть все ответы анкеты (включая обращение)',all);
     const full=document.createElement('div');full.className='review-answers';all.append(full);
-    const bool={yes:'Да',no:'Нет',unsure:'Не уверен(а)'};
+    const bool={yes:'Да',no:'Нет',unsure:'Сложно сказать'};
     const painDetails={none:'Нет',sometimes:'Иногда, умеренный',often:'Частый или сильный'};
-    const clarifier={notnoticed:'Никогда не замечал(а) перечисленных симптомов',unclear:'Не понимаю, как их распознать',possible:'Похоже, что-то из перечисленного бывает'};
+    const clarifier={notnoticed:'Не наблюдаю перечисленных симптомов',unclear:'Не понимаю, как их распознать',possible:'Похоже, что-то из перечисленного бывает'};
     const allQ=[
+      `Обращение: ${a.gender==='woman'?'женщина':a.gender==='man'?'мужчина':'без указания пола'}.`,
       `1. Что беспокоит: ${selected.join(', ')}.`,
       `2. Специалист говорил о гиперлордозе: ${bool[a.diagnosed]||'Не знаю'}.`,
-      `3. Кажется ли поясничный прогиб выраженным: ${bool[a.curve]||'Не уверен(а)'}.`,
+      `3. Кажется ли поясничный прогиб выраженным: ${bool[a.curve]||'Сложно сказать'}.`,
       `4. Боль или дискомфорт в пояснице: ${painDetails[a.pain]||'Не указано'}${a.painClarify==='severe'?' (сильная, новая или ограничивает движения)':a.painClarify==='frequent'?' (часто повторяется, обычно не сильная)':''}.`,
       `5. Изменение живота или вздутия в течение дня: ${a.bloating==='unsure'?'Не обращаю внимания':bool[a.bloating]||'Не указано'}.`,
       `6. Тревожные симптомы: ${bool[a.redflags]||'Не указано'}${a.flagClarify?' — '+clarifier[a.flagClarify]:''}.`,
@@ -872,7 +959,7 @@
       const box=document.createElement('div');box.className='quality-confirm';root.append(box);
       const lbl=document.createElement('label');box.append(lbl);
       acknowledge=document.createElement('input');acknowledge.type='checkbox';lbl.append(acknowledge);
-      lbl.append(document.createTextNode('Я ещё раз проверил(а) указанные фотографии и подтверждаю, что ракурсы соответствуют примерам: сбоку, спереди и сзади.'));
+      lbl.append(document.createTextNode('Подтверждаю, что фотографии расположены правильно: сбоку, спереди, сзади. Понимаю, что перепутанные ракурсы могут исказить результат.'));
     }
     const buttons=document.createElement('div');buttons.className='review-actions';root.append(buttons);
     const back=add('button',!photoOk?'← Заменить фотографии':'← Вернуться к фото',buttons);back.type='button';back.className='back';
