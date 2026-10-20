@@ -111,103 +111,163 @@
     .wizard-nav button[hidden]{display:none!important}
     .result-blank{margin:16px 0;color:#56636c}
     @media(max-width:480px){.report-toolbar{align-items:flex-start}.report-toolbar button{max-width:145px}}
+
+    /* Three-screen onboarding and a separate photograph review. */
+    .intake-shell,.review-shell{max-width:780px;margin:0 auto;background:#fff;border:1px solid #dbe5e3;border-radius:20px;padding:clamp(18px,3.5vw,30px)}
+    .entry-progress-top{display:flex;justify-content:space-between;gap:10px;align-items:center;color:#146b53;font-size:12px;font-weight:750;letter-spacing:.055em}
+    .entry-progress-track{height:7px;background:#e4eeea;border-radius:30px;margin:12px 0 27px;overflow:hidden}
+    #intakeBar{height:100%;width:33.33%;background:#16775d;border-radius:30px;transition:width .25s}
+    .intake-panel h1{font-size:clamp(31px,5vw,43px);line-height:1.1;letter-spacing:-.04em}
+    .intake-panel .welcome-lead{font-size:17px;color:#4a5863;line-height:1.6;margin-bottom:22px}
+    .welcome-kicker,.step-tag{display:inline-block;background:#e9f5ef;border-radius:40px;padding:7px 12px;color:#155f49;font-size:12px;font-weight:800;letter-spacing:.05em;margin-bottom:10px}
+    .journey{border:1px solid #dae7e1;border-radius:16px;overflow:hidden;margin:20px 0}
+    .journey-row{display:flex;align-items:flex-start;gap:15px;padding:18px 17px;background:#f8fbf9;border-bottom:1px solid #e2ebe5}
+    .journey-row:last-child{border-bottom:0}.journey-icon{border-radius:12px;background:#e1f1e9;color:#17674d;padding:10px;min-width:43px;text-align:center;font-weight:800;font-size:16px}
+    .journey-row strong{font-size:17px}.journey-row p{margin:6px 0 0;color:#51606b;font-size:14px;line-height:1.5}
+    .privacy-welcome{padding:17px 19px;border:1px solid #dce7e5;background:#f5f9f8;border-radius:14px;font-size:14px;line-height:1.6}
+    .privacy-welcome p{margin:7px 0 0}.welcome-foot{color:#52636c;margin:17px 0 0}
+    .entry-head h2,.review-shell h2{font-size:clamp(26px,4vw,33px);letter-spacing:-.03em;margin:3px 0 10px;line-height:1.15}
+    .entry-head p{font-size:15px;color:#56636f;line-height:1.6;margin-bottom:20px}
+    .intake-shell .card{padding:16px;border:1px solid #e3e9eb;border-radius:14px}
+    .intake-shell .questionnaire{padding:0;border:0;margin:0}
+    .intake-shell .questionnaire h2,.intake-shell .questionnaire .subq{display:none}
+    .intake-shell .photo-rule{margin:13px 0 22px;padding:14px;border-width:1px}
+    .intake-shell .photo-rule strong{font-size:15px}
+    .entry-nav{display:flex;gap:12px;margin-top:22px;padding-top:18px;border-top:1px solid #e4ece9}
+    .entry-nav button{margin:0;flex:1;width:auto;background:#155e49;color:white;-webkit-text-fill-color:white}
+    .entry-nav .entry-prev{flex:.6;background:#e8eef0;color:#26363d;-webkit-text-fill-color:#26363d}
+    .entry-help{font-size:13px;color:#667480;margin-top:12px}
+    .entry-help.alert{color:#9b5a0b}
+    .photo-confirm{padding:13px 16px;border:1px solid #d7e7e0;background:#f4faf6;border-radius:13px;margin:19px 0}
+    .photo-confirm .confirm{margin:0;line-height:1.5}
+    .review-shell{margin-top:0}.review-shell .review-sub{color:#596873;line-height:1.6;margin:5px 0 20px}
+    .review-photos{display:grid;grid-template-columns:repeat(3,1fr);gap:11px;margin:20px 0}
+    .review-photo{background:#f4f7f6;border:1px solid #e1e9e5;border-radius:12px;padding:10px;text-align:center}
+    .review-photo strong{display:block;font-size:13px;margin-bottom:7px}
+    .review-photo img{display:block;max-width:100%;width:100%;height:185px;object-fit:contain;border-radius:8px}
+    .review-photo p{font-size:12px;line-height:1.5;color:#536370;margin:8px 0 0}
+    .review-answers{padding:15px 19px;background:#f5faf7;border:1px solid #d4e4db;border-radius:14px;margin:20px 0}
+    .review-answers h3{font-size:17px;margin:0 0 9px}.review-answers ul{line-height:1.65;margin:0;padding-left:18px;font-size:14px}
+    .review-full-answers{margin:13px 0}.review-full-answers summary{padding:12px 15px;border:1px solid #dbe5e1;border-radius:10px;cursor:pointer;font-weight:650;color:#17674f}
+    .review-full-answers .review-answers{margin:10px 0 0}.review-full-answers li{margin-bottom:6px}
+    .review-actions{display:flex;gap:12px;border-top:1px solid #e3ebe7;padding-top:18px}
+    .review-actions button{margin:0;flex:1}.review-actions .back{background:#e8eef0;color:#26363d}
+    .review-actions button.primary{background:#155e49;color:white;-webkit-text-fill-color:white}
+    .review-warning{border:1px solid #e6d7bd;background:#fbf7ef;border-radius:12px;padding:15px;color:#6b4e19;line-height:1.55;margin:14px 0}
+    @media(max-width:520px){.entry-progress-top{font-size:10px}.review-photos{grid-template-columns:1fr;gap:12px}.review-photo{display:flex;align-items:center;gap:12px;text-align:left}.review-photo img{width:115px;height:145px;order:-1}.review-photo div{flex:1}.review-actions button{padding:12px 7px;font-size:14px}.entry-nav button{padding:13px 9px}}
   </style>
 </head>
 <body>
 <main>
-<div id="intakeSection">
-  <div class="eyebrow">Прототип · шаг 7</div>
-  <h1>Твоя персональная карта осанки</h1>
-  <p class="sub">Загрузи три фотографии: сбоку, спереди и сзади. На каждой должен быть виден человек целиком. MediaPipe проверит, удалось ли распознать ориентиры тела. Затем ответь на 7 коротких вопросов. После проверки откроется отдельный персональный разбор из 5 коротких шагов.</p>
-  <div class="photo-rule"><strong>ВАЖНО: все 3 фото только В ПОЛНЫЙ РОСТ!</strong>Человек должен быть виден целиком: <b>от макушки головы до обеих стоп</b>. Не обрезай голову, ноги и стопы. Оставь немного свободного места сверху и снизу. <b>Фотографии по пояс НЕ подходят.</b></div>
-  <div class="notice"><strong>Конфиденциальность:</strong> выбранные фотографии обрабатываются локально в браузере. Программа не загружает их в GitHub и не отправляет на наш сервер. Для работы требуется интернет: код MediaPipe и модель загружаются с внешних технических серверов. Используй только снимки, на обработку которых есть согласие.</div>
+<div id="intakeSection" class="intake-shell">
+  <div class="entry-progress"><div class="entry-progress-top"><span>ПОДГОТОВКА ТВОЕЙ КАРТЫ СПИНЫ</span><strong id="intakeCount">ШАГ 1 ИЗ 3</strong></div><div class="entry-progress-track"><div id="intakeBar"></div></div></div>
+<section class="intake-panel" data-intake="0">
+  <div class="welcome-head"><span class="welcome-kicker">ТВОЯ ПЕРСОНАЛЬНАЯ КАРТА СПИНЫ</span>
+  <h1>Узнай больше о своей спине и осанке</h1>
+  <p class="welcome-lead">Мы внимательно посмотрим, как расположено твоё тело на фотографиях, и сопоставим это с тем, что ты расскажешь о своих ощущениях.</p></div>
+  <div class="journey">
+    <div class="journey-row"><span class="journey-icon">01</span><div><strong>Три фотографии</strong><p>Сбоку, спереди и сзади. Программа найдёт ориентиры тела и покажет линии прямо на твоих снимках.</p></div></div>
+    <div class="journey-row"><span class="journey-icon">02</span><div><strong>7 коротких вопросов</strong><p>О том, что тебя беспокоит: поясница, живот, шея, плечи или осанка в целом.</p></div></div>
+    <div class="journey-row"><span class="journey-icon">03</span><div><strong>Твоя персональная карта</strong><p>Получишь наглядный разбор фотографий, наблюдения по своему запросу и возможные следующие шаги.</p></div></div>
+  </div>
+  <div class="privacy-welcome"><strong>Твои фотографии остаются у тебя.</strong><p>В этой тестовой версии снимки и ответы обрабатываются в твоём браузере, не загружаются на наш сервер и не сохраняются в GitHub. Для работы библиотека анализа загружается из интернета. Используй только фотографии, на обработку которых ты согласен(на).</p></div>
+  <p class="welcome-foot">Это займёт несколько минут. Начнём?</p>
+</section><section class="intake-panel" data-intake="1" hidden>
+  <div class="entry-head"><span class="step-tag">ФОТОГРАФИИ</span><h2>Покажи свою осанку с трёх сторон</h2><p>Выбери три фотографии. Важно, чтобы на каждой был один человек <strong>в полный рост, от макушки головы до стоп</strong>. Камера примерно на уровне талии, лучше ровный свет.</p></div>
+  <div class="photo-rule"><strong>Все фотографии только В ПОЛНЫЙ РОСТ</strong>От макушки до обеих стоп, ничего не обрезано. Фото по пояс не подходят.</div>
   <section class="card" data-kind="side">
-    <div class="card-head"><h2>1. Вид сбоку</h2><span aria-hidden="true">↔</span></div>
-    <p class="hint"><span class="full-length">ОБЯЗАТЕЛЬНО: В ПОЛНЫЙ РОСТ, ОТ ГОЛОВЫ ДО СТОП.</span> Строго боком к камере, камера примерно на уровне талии, руки вдоль корпуса. Не втягивай живот.</p>
-    <input id="side" type="file" accept="image/jpeg,image/png,image/webp" aria-label="Фотография сбоку" />
-    <img class="preview" alt="Предпросмотр фотографии сбоку" />
-    <canvas aria-label="Снимок сбоку с найденными ориентирами тела"></canvas>
-    <div class="status" aria-live="polite">Фото ещё не выбрано</div>
-  </section>
-  <section class="card" data-kind="front">
-    <div class="card-head"><h2>2. Вид спереди</h2><span aria-hidden="true">↑</span></div>
-    <p class="hint"><span class="full-length">ОБЯЗАТЕЛЬНО: В ПОЛНЫЙ РОСТ, ОТ ГОЛОВЫ ДО СТОП.</span> Лицом к камере, руки свободно опущены, тело не повёрнуто.</p>
-    <input id="front" type="file" accept="image/jpeg,image/png,image/webp" aria-label="Фотография спереди" />
-    <img class="preview" alt="Предпросмотр фотографии спереди" />
-    <canvas aria-label="Снимок спереди с найденными ориентирами тела"></canvas>
-    <div class="status" aria-live="polite">Фото ещё не выбрано</div>
-  </section>
-  <section class="card" data-kind="back">
-    <div class="card-head"><h2>3. Вид сзади</h2><span aria-hidden="true">↓</span></div>
-    <p class="hint"><span class="full-length">ОБЯЗАТЕЛЬНО: В ПОЛНЫЙ РОСТ, ОТ ГОЛОВЫ ДО СТОП.</span> Спиной к камере, руки вдоль корпуса. Лучше однотонная облегающая одежда.</p>
-    <input id="back" type="file" accept="image/jpeg,image/png,image/webp" aria-label="Фотография сзади" />
-    <img class="preview" alt="Предпросмотр фотографии сзади" />
-    <canvas aria-label="Снимок сзади с найденными ориентирами тела"></canvas>
-    <div class="status" aria-live="polite">Фото ещё не выбрано</div>
-  </section>
+<div class="card-head"><h2>1. Вид сбоку</h2><span aria-hidden="true">↔</span></div>
+<p class="hint"><span class="full-length">ОБЯЗАТЕЛЬНО: В ПОЛНЫЙ РОСТ, ОТ ГОЛОВЫ ДО СТОП.</span> Строго боком к камере, камера примерно на уровне талии, руки вдоль корпуса. Не втягивай живот.</p>
+<input accept="image/jpeg,image/png,image/webp" aria-label="Фотография сбоку" id="side" type="file"/>
+<img alt="Предпросмотр фотографии сбоку" class="preview"/>
+<canvas aria-label="Снимок сбоку с найденными ориентирами тела"></canvas>
+<div aria-live="polite" class="status">Фото ещё не выбрано</div>
+</section>
+<section class="card" data-kind="front">
+<div class="card-head"><h2>2. Вид спереди</h2><span aria-hidden="true">↑</span></div>
+<p class="hint"><span class="full-length">ОБЯЗАТЕЛЬНО: В ПОЛНЫЙ РОСТ, ОТ ГОЛОВЫ ДО СТОП.</span> Лицом к камере, руки свободно опущены, тело не повёрнуто.</p>
+<input accept="image/jpeg,image/png,image/webp" aria-label="Фотография спереди" id="front" type="file"/>
+<img alt="Предпросмотр фотографии спереди" class="preview"/>
+<canvas aria-label="Снимок спереди с найденными ориентирами тела"></canvas>
+<div aria-live="polite" class="status">Фото ещё не выбрано</div>
+</section>
+<section class="card" data-kind="back">
+<div class="card-head"><h2>3. Вид сзади</h2><span aria-hidden="true">↓</span></div>
+<p class="hint"><span class="full-length">ОБЯЗАТЕЛЬНО: В ПОЛНЫЙ РОСТ, ОТ ГОЛОВЫ ДО СТОП.</span> Спиной к камере, руки вдоль корпуса. Лучше однотонная облегающая одежда.</p>
+<input accept="image/jpeg,image/png,image/webp" aria-label="Фотография сзади" id="back" type="file"/>
+<img alt="Предпросмотр фотографии сзади" class="preview"/>
+<canvas aria-label="Снимок сзади с найденными ориентирами тела"></canvas>
+<div aria-live="polite" class="status">Фото ещё не выбрано</div>
+</section>
+  <p class="entry-help" id="photoStepHint" aria-live="polite">Загрузи три фотографии, чтобы продолжить.</p>
+</section><section class="intake-panel" data-intake="2" hidden>
+  <div class="entry-head"><span class="step-tag">О ТЕБЕ</span><h2>Расскажи, что тебя беспокоит</h2><p>Всего семь вопросов. Твои ответы помогут сделать карту спины ближе именно к твоей ситуации.</p></div>
   <section class="questionnaire" id="questions">
-    <h2>Короткая анкета: 7 вопросов</h2>
-    <p class="subq">Отметь, что тебя беспокоит. Можно выбрать несколько вариантов. Ответы помогут сделать итоговый разбор полезнее именно для тебя.</p>
-    <form id="survey">
-      <fieldset><legend>1. Что привело тебя на эту проверку? Можно выбрать несколько.</legend><div class="choices">
-        <label><input type="checkbox" name="concern" value="abdomen"> Живот выступает вперёд</label>
-        <label><input type="checkbox" name="concern" value="pain"> Боль или дискомфорт в пояснице</label>
-        <label><input type="checkbox" name="concern" value="curve"> Кажется, что сильный прогиб в пояснице</label>
-        <label><input type="checkbox" name="concern" value="neckPain"> Боль или дискомфорт в шее</label>
-        <label><input type="checkbox" name="concern" value="shoulderPain"> Боль или дискомфорт в плечах</label>
-        <label><input type="checkbox" name="concern" value="slouch"> Сутулость или плечи уходят вперёд</label>
-        <label><input type="checkbox" name="concern" value="backGeneralPain"> Боль или дискомфорт в спине (не только в пояснице)</label>
-        <label><input type="checkbox" name="concern" value="general"> Хочу лучше понять свою осанку</label>
-        <label><input type="checkbox" name="concern" value="other"> Другое</label>
-      </div><p class="choice-note">Пожалуйста, отметь хотя бы один вариант.</p>
-      <input id="otherConcern" type="text" maxlength="160" placeholder="Если выбрано «Другое», напиши в двух словах (необязательно)" aria-label="Другой запрос" />
-      <div id="priorityBox" class="clarifier" hidden><strong>Ты отметил(а) несколько причин. Какая сейчас главная?</strong><div class="choices" id="priorityChoices"></div></div></fieldset>
-      <fieldset><legend>2. Говорил ли врач или профильный специалист, что у тебя гиперлордоз?</legend><div class="choices">
-        <label><input type="radio" name="diagnosed" value="yes" required> Да</label>
-        <label><input type="radio" name="diagnosed" value="no"> Нет</label>
-        <label><input type="radio" name="diagnosed" value="unsure"> Не знаю</label>
-      </div></fieldset>
-      <fieldset><legend>3. Кажется ли тебе, что прогиб в пояснице выражен?</legend><div class="choices">
-        <label><input type="radio" name="curve" value="yes" required> Да</label>
-        <label><input type="radio" name="curve" value="no"> Нет</label>
-        <label><input type="radio" name="curve" value="unsure"> Не уверена / не уверен</label>
-      </div></fieldset>
-      <fieldset><legend>4. Есть ли у тебя сейчас боль или дискомфорт в пояснице?</legend><div class="choices">
-        <label><input type="radio" name="pain" value="none" required> Нет</label>
-        <label><input type="radio" name="pain" value="sometimes"> Иногда, умеренный</label>
-        <label><input type="radio" name="pain" value="often"> Частый или сильный</label>
-      </div><div id="painClarifier" class="clarifier" hidden><strong>Уточни, пожалуйста, что ближе к твоей ситуации:</strong><div class="choices">
-        <label><input type="radio" name="painClarify" value="frequent"> Боль часто повторяется, но обычно не сильная</label>
-        <label><input type="radio" name="painClarify" value="severe"> Боль сейчас сильная, новая или заметно ограничивает движение</label>
-      </div></div></fieldset>
-      <fieldset><legend>5. Меняется ли объём или ощущение вздутия живота в течение дня?</legend><div class="choices">
-        <label><input type="radio" name="bloating" value="yes" required> Да</label>
-        <label><input type="radio" name="bloating" value="no"> Нет</label>
-        <label><input type="radio" name="bloating" value="unsure"> Не обращаю внимания</label>
-      </div></fieldset>
-      <fieldset><legend>6. Есть ли тревожные симптомы: новая слабость в ногах, онемение в области промежности, нарушение контроля мочеиспускания или стула, либо сильная боль после травмы?</legend><div class="choices">
-        <label><input type="radio" name="redflags" value="yes" required> Да</label>
-        <label><input type="radio" name="redflags" value="no"> Нет</label>
-        <label><input type="radio" name="redflags" value="unsure"> Не уверена / не уверен</label>
-      </div><div id="flagClarifier" class="clarifier" hidden>
-      <strong>Ты ответил(а) «Не уверен(а)». Это нормально, давай уточним:</strong>
-      <div class="choices">
-        <label><input type="radio" name="flagClarify" value="notnoticed"> Я никогда не замечал(а) этих симптомов</label>
-        <label><input type="radio" name="flagClarify" value="unclear"> Я не понимаю, как их распознать</label>
-        <label><input type="radio" name="flagClarify" value="possible"> Похоже, что-то из перечисленного бывает</label>
-      </div><p class="choice-note">Это помогает не путать отсутствие наблюдений с наличием симптомов.</p>
-      </div></fieldset>
-      <fieldset><legend>7. Замечаешь ли ты, что живот выступает вперёд в обычной расслабленной стойке?</legend><div class="choices">
-        <label><input type="radio" name="abdomenAppearance" value="yes" required> Да</label>
-        <label><input type="radio" name="abdomenAppearance" value="no"> Нет</label>
-        <label><input type="radio" name="abdomenAppearance" value="unsure"> Не уверена / не уверен</label>
-      </div></fieldset>
-    </form>
-    <p class="quiz-progress" id="surveyProgress">Ответов: 0 из 7.</p>
-  </section>
-  <label class="confirm"><input type="checkbox" id="views" /> <span>Я проверил(а), что <b>на всех трёх фотографиях человек виден в полный рост, от головы до стоп</b>, и что ракурсы соответствуют подписям. MediaPipe пока не умеет надёжно отличать снимок спереди от снимка сзади.</span></label>
-  <button type="button" id="check" disabled>Проверить фото и составить карту наблюдений</button>
+<h2>Короткая анкета: 7 вопросов</h2>
+<p class="subq">Отметь, что тебя беспокоит. Можно выбрать несколько вариантов. Ответы помогут сделать итоговый разбор полезнее именно для тебя.</p>
+<form id="survey">
+<fieldset><legend>1. Что привело тебя на эту проверку? Можно выбрать несколько.</legend><div class="choices">
+<label><input name="concern" type="checkbox" value="abdomen"/> Живот выступает вперёд</label>
+<label><input name="concern" type="checkbox" value="pain"/> Боль или дискомфорт в пояснице</label>
+<label><input name="concern" type="checkbox" value="curve"/> Кажется, что сильный прогиб в пояснице</label>
+<label><input name="concern" type="checkbox" value="neckPain"/> Боль или дискомфорт в шее</label>
+<label><input name="concern" type="checkbox" value="shoulderPain"/> Боль или дискомфорт в плечах</label>
+<label><input name="concern" type="checkbox" value="slouch"/> Сутулость или плечи уходят вперёд</label>
+<label><input name="concern" type="checkbox" value="backGeneralPain"/> Боль или дискомфорт в спине (не только в пояснице)</label>
+<label><input name="concern" type="checkbox" value="general"/> Хочу лучше понять свою осанку</label>
+<label><input name="concern" type="checkbox" value="other"/> Другое</label>
+</div><p class="choice-note">Пожалуйста, отметь хотя бы один вариант.</p>
+<input aria-label="Другой запрос" id="otherConcern" maxlength="160" placeholder="Если выбрано «Другое», напиши в двух словах (необязательно)" type="text">
+<div class="clarifier" hidden="" id="priorityBox"><strong>Ты отметил(а) несколько причин. Какая сейчас главная?</strong><div class="choices" id="priorityChoices"></div></div></input></fieldset>
+<fieldset><legend>2. Говорил ли врач или профильный специалист, что у тебя гиперлордоз?</legend><div class="choices">
+<label><input name="diagnosed" required="" type="radio" value="yes"/> Да</label>
+<label><input name="diagnosed" type="radio" value="no"/> Нет</label>
+<label><input name="diagnosed" type="radio" value="unsure"/> Не знаю</label>
+</div></fieldset>
+<fieldset><legend>3. Кажется ли тебе, что прогиб в пояснице выражен?</legend><div class="choices">
+<label><input name="curve" required="" type="radio" value="yes"/> Да</label>
+<label><input name="curve" type="radio" value="no"/> Нет</label>
+<label><input name="curve" type="radio" value="unsure"/> Не уверена / не уверен</label>
+</div></fieldset>
+<fieldset><legend>4. Есть ли у тебя сейчас боль или дискомфорт в пояснице?</legend><div class="choices">
+<label><input name="pain" required="" type="radio" value="none"/> Нет</label>
+<label><input name="pain" type="radio" value="sometimes"/> Иногда, умеренный</label>
+<label><input name="pain" type="radio" value="often"/> Частый или сильный</label>
+</div><div class="clarifier" hidden="" id="painClarifier"><strong>Уточни, пожалуйста, что ближе к твоей ситуации:</strong><div class="choices">
+<label><input name="painClarify" type="radio" value="frequent"/> Боль часто повторяется, но обычно не сильная</label>
+<label><input name="painClarify" type="radio" value="severe"/> Боль сейчас сильная, новая или заметно ограничивает движение</label>
+</div></div></fieldset>
+<fieldset><legend>5. Меняется ли объём или ощущение вздутия живота в течение дня?</legend><div class="choices">
+<label><input name="bloating" required="" type="radio" value="yes"/> Да</label>
+<label><input name="bloating" type="radio" value="no"/> Нет</label>
+<label><input name="bloating" type="radio" value="unsure"/> Не обращаю внимания</label>
+</div></fieldset>
+<fieldset><legend>6. Есть ли тревожные симптомы: новая слабость в ногах, онемение в области промежности, нарушение контроля мочеиспускания или стула, либо сильная боль после травмы?</legend><div class="choices">
+<label><input name="redflags" required="" type="radio" value="yes"/> Да</label>
+<label><input name="redflags" type="radio" value="no"/> Нет</label>
+<label><input name="redflags" type="radio" value="unsure"/> Не уверена / не уверен</label>
+</div><div class="clarifier" hidden="" id="flagClarifier">
+<strong>Ты ответил(а) «Не уверен(а)». Это нормально, давай уточним:</strong>
+<div class="choices">
+<label><input name="flagClarify" type="radio" value="notnoticed"/> Я никогда не замечал(а) этих симптомов</label>
+<label><input name="flagClarify" type="radio" value="unclear"/> Я не понимаю, как их распознать</label>
+<label><input name="flagClarify" type="radio" value="possible"/> Похоже, что-то из перечисленного бывает</label>
+</div><p class="choice-note">Это помогает не путать отсутствие наблюдений с наличием симптомов.</p>
+</div></fieldset>
+<fieldset><legend>7. Замечаешь ли ты, что живот выступает вперёд в обычной расслабленной стойке?</legend><div class="choices">
+<label><input name="abdomenAppearance" required="" type="radio" value="yes"/> Да</label>
+<label><input name="abdomenAppearance" type="radio" value="no"/> Нет</label>
+<label><input name="abdomenAppearance" type="radio" value="unsure"/> Не уверена / не уверен</label>
+</div></fieldset>
+</form>
+<p class="quiz-progress" id="surveyProgress">Ответов: 0 из 7.</p>
+</section>
+  <div class="photo-confirm"><label class="confirm"><input id="views" type="checkbox"> <span>Я проверил(а), что <b>на всех трёх фотографиях человек виден в полный рост, от головы до стоп</b>, и что ракурсы соответствуют подписям. MediaPipe пока не умеет надёжно отличать снимок спереди от снимка сзади.</span></input></label></div>
+  <p class="entry-help" id="questionStepHint" aria-live="polite">Ответь на все вопросы и подтверди ракурсы фотографий.</p>
+</section>
+  <div class="entry-nav"><button type="button" id="intakePrev" class="entry-prev" hidden>← Назад</button><button type="button" id="check">Начать →</button></div>
 </div>
+<section id="reviewSection" class="review-shell" hidden aria-live="polite"></section>
   <div id="result" role="status" aria-live="polite"></div>
 </main>
 <script type="module">
@@ -261,14 +321,32 @@
     const el=document.querySelector(`[data-kind="${id}"] .status`);
     el.textContent=message;el.className="status"+(type?" "+type:"");
   }
-  function updateButton(){
-    const a=readAnswers();button.disabled=!views.checked||!slots.every(id=>files.has(id))||
-    !surveyFields.every(k=>Boolean(a[k]))||a.concerns.length===0||
-    (a.concerns.length>1&&!a.primary)||
-    (a.redflags==="unsure"&&!a.flagClarify)||
-    (a.pain==="often"&&!a.painClarify);
+  function surveyReady(){
+    const a=readAnswers();return views.checked && surveyFields.every(k=>Boolean(a[k])) && a.concerns.length>0 &&
+    !(a.concerns.length>1&&!a.primary) && !(a.redflags==="unsure"&&!a.flagClarify) && !(a.pain==="often"&&!a.painClarify);
   }
-  function clearResult(){resultBox.style.display="none";resultBox.replaceChildren();}
+  function updateButton(){
+    if(intakeStep===0){button.disabled=false;return;}
+    if(intakeStep===1){button.disabled=!slots.every(id=>files.has(id));return;}
+    button.disabled=!slots.every(id=>files.has(id))||!surveyReady();
+  }
+  function clearResult(){resultBox.style.display="none";resultBox.replaceChildren();document.getElementById('reviewSection').hidden=true;}
+  let intakeStep=0;
+  const intakePanels=[...document.querySelectorAll('.intake-panel')];
+  const intakeCounter=document.getElementById('intakeCount'),intakeBar=document.getElementById('intakeBar'),intakePrev=document.getElementById('intakePrev');
+  function showIntake(i,scroll=true){
+    intakeStep=Math.max(0,Math.min(2,i));
+    document.getElementById('intakeSection').hidden=false;
+    intakePanels.forEach((node,index)=>node.hidden=index!==intakeStep);
+    intakeCounter.textContent=`ШАГ ${intakeStep+1} ИЗ 3`;
+    intakeBar.style.width=`${(intakeStep+1)/3*100}%`;
+    intakePrev.hidden=intakeStep===0;
+    button.textContent=intakeStep===0?'Начать →':intakeStep===1?'Перейти к анкете →':'Проверить фото и подготовить карту →';
+    updateButton();
+    if(scroll)document.getElementById('intakeSection').scrollIntoView({behavior:'smooth',block:'start'});
+  }
+  intakePrev.addEventListener('click',()=>showIntake(intakeStep-1));
+  showIntake(0,false);
   views.addEventListener("change",updateButton);
   slots.forEach(id=>{
     const input=document.getElementById(id),card=input.closest(".card"),preview=card.querySelector(".preview"),canvas=card.querySelector("canvas");
@@ -465,12 +543,12 @@
     const chosenUrl=generalCourse?'https://espalda.online/products/espalda-sana-y-cuello-sin-dolor':'https://espalda.online/products/hiperlordosis';
     // Accessible alternate action: the user can return to source form anytime.
     const toolbar=document.createElement('div');toolbar.className='report-toolbar';parent.append(toolbar);
-    add('strong','Твой персональный разбор',toolbar);
+    add('strong','Твоя персональная карта спины',toolbar);
     const edit=add('button','↩ Изменить фото или ответы',toolbar);edit.type='button';
-    edit.addEventListener('click',()=>{parent.style.display='none';document.getElementById('intakeSection').hidden=false;window.scrollTo({top:0,behavior:'smooth'});});
+    edit.addEventListener('click',()=>{parent.style.display='none';showIntake(2);});
     const wizard=document.createElement('div');wizard.className='report-wizard';parent.append(wizard);
     const top=document.createElement('div');top.className='wizard-top';wizard.append(top);
-    add('span','ВАШ ПЕРСОНАЛЬНЫЙ РАЗБОР',top).className='wizard-count';
+    add('span','ТВОЯ ПЕРСОНАЛЬНАЯ КАРТА СПИНЫ',top).className='wizard-count';
     const counter=add('span','',top);counter.className='wizard-count';
     const progress=document.createElement('div');progress.className='wizard-progress';wizard.append(progress);
     const bar=document.createElement('div');bar.className='wizard-bar';progress.append(bar);
@@ -613,10 +691,70 @@
     show(0);
   }
   function add(tag,text,parent){const el=document.createElement(tag);el.textContent=text;parent.append(el);return el;}
+  function renderReview(report,photoOk,metrics,measurements,contour){
+    const root=document.getElementById('reviewSection');root.replaceChildren();root.hidden=false;
+    add('span','ПРОВЕРКА ЗАВЕРШЕНА',root).className='step-tag';
+    add('h2',photoOk?'Мы получили и обработали твои фотографии':'Некоторые фотографии нужно улучшить',root);
+    paragraph(root,photoOk?'Сначала посмотри, что удалось получить. Затем откроем твою персональную карту спины с объяснениями и рекомендациями.':'Прежде чем составить карту, важно получить три достаточно чёткие фотографии в полный рост.','review-sub');
+    const photos=document.createElement('div');photos.className='review-photos';root.append(photos);
+    for(let i=0;i<slots.length;i++){
+      const id=slots[i],slot=document.createElement('article');slot.className='review-photo';photos.append(slot);
+      const img=document.createElement('img');
+      const drawn=document.querySelector(`[data-kind="${id}"] canvas`);
+      img.src=drawn.width&&drawn.height?drawn.toDataURL('image/jpeg',.85):urls.get(id);
+      img.alt=`${names[id]}: фотография с отмеченными ориентирами тела`;
+      slot.append(img);const column=document.createElement('div');slot.append(column);
+      add('strong',names[id],column);
+      paragraph(column,report[i]||'Снимок загружен.');
+    }
+    const a=readAnswers();const summary=reportSection(root,'Твои ответы — в двух словах','review-answers');
+    const selected=a.concerns.map(k=>k==='other'&&a.other?a.other:concernLabels[k]);
+    const primary=a.concerns.length>1?a.primary:a.concerns[0];
+    const painLabel={none:'нет',sometimes:'иногда умеренный',often:'частый или сильный'};
+    const q=[`Что интересует: ${selected.join(', ')}.`,`Главный вопрос: ${concernLabels[primary]||'твой запрос'}.`,`Поясница: ${painLabel[a.pain]||'не указано'}.`,`Гиперлордоз ранее обсуждался со специалистом: ${a.diagnosed==='yes'?'да':a.diagnosed==='no'?'нет':'не знаю'}.`];
+    reportList(summary,q);
+    const all=document.createElement('details');all.className='review-full-answers';root.append(all);
+    add('summary','Посмотреть все 7 ответов',all);
+    const full=document.createElement('div');full.className='review-answers';all.append(full);
+    const bool={yes:'Да',no:'Нет',unsure:'Не уверен(а)'};
+    const painDetails={none:'Нет',sometimes:'Иногда, умеренный',often:'Частый или сильный'};
+    const clarifier={notnoticed:'Никогда не замечал(а) перечисленных симптомов',unclear:'Не понимаю, как их распознать',possible:'Похоже, что-то из перечисленного бывает'};
+    const allQ=[
+      `1. Что беспокоит: ${selected.join(', ')}.`,
+      `2. Специалист говорил о гиперлордозе: ${bool[a.diagnosed]||'Не знаю'}.`,
+      `3. Кажется ли поясничный прогиб выраженным: ${bool[a.curve]||'Не уверен(а)'}.`,
+      `4. Боль или дискомфорт в пояснице: ${painDetails[a.pain]||'Не указано'}${a.painClarify==='severe'?' (сильная, новая или ограничивает движения)':a.painClarify==='frequent'?' (часто повторяется, обычно не сильная)':''}.`,
+      `5. Изменение живота или вздутия в течение дня: ${a.bloating==='unsure'?'Не обращаю внимания':bool[a.bloating]||'Не указано'}.`,
+      `6. Тревожные симптомы: ${bool[a.redflags]||'Не указано'}${a.flagClarify?' — '+clarifier[a.flagClarify]:''}.`,
+      `7. Живот выступает вперёд в расслабленной стойке: ${bool[a.abdomenAppearance]||'Не указано'}.`
+    ];
+    reportList(full,allQ);
+    if(!photoOk){
+      const warn=document.createElement('div');warn.className='review-warning';root.append(warn);
+      paragraph(warn,'На одном или нескольких снимках недостаточно хорошо видны ориентиры тела. Посмотри подписи под фотографиями и при необходимости пересними их.');
+    }
+    const buttons=document.createElement('div');buttons.className='review-actions';root.append(buttons);
+    const back=add('button','← Вернуться к фото',buttons);back.type='button';back.className='back';
+    back.onclick=()=>{root.hidden=true;showIntake(1)};
+    const proceed=add('button','Посмотреть мою карту спины →',buttons);proceed.type='button';proceed.className='primary';proceed.disabled=!photoOk;
+    proceed.onclick=()=>{
+      root.hidden=true;
+      resultBox.replaceChildren();resultBox.style.display='block';
+      renderReportWizard(resultBox,metrics,photoOk,report,measurements,contour);
+      resultBox.scrollIntoView({behavior:'smooth',block:'start'});
+    };
+    root.scrollIntoView({behavior:'smooth',block:'start'});
+  }
   button.addEventListener("click",async()=>{
     if(button.disabled)return;
-    button.disabled=true;clearResult();resultBox.style.display="block";
-    add("h2","Загружаем модель распознавания…",resultBox);
+    if(intakeStep===0){showIntake(1);return;}
+    if(intakeStep===1){showIntake(2);return;}
+    if(!surveyReady()){updateButton();return;}
+    button.disabled=true;
+    const root=document.getElementById('reviewSection');root.replaceChildren();root.hidden=false;
+    root.innerHTML='<h2>Проверяем фотографии…</h2><p class="review-sub">Загружаем модель и отмечаем ориентиры на трёх снимках. Это может занять немного времени.</p>';
+    document.getElementById('intakeSection').hidden=true;
+    root.scrollIntoView({behavior:'smooth',block:'start'});
     add("p","При первом запуске это может занять несколько секунд. Интернет должен быть включён.",resultBox);
     try{
       const model=await getLandmarker();resultBox.replaceChildren();add("h2","Проверяем фотографии…",resultBox);
@@ -644,15 +782,15 @@
         if(problems.length){status(id,"⚠ "+problems.join(" ")+" Попробуй переснять.","warn");report.push(`«${names[id]}»: требуется улучшение фото.`);}
         else{status(id,"✓ Основные ориентиры найдены. Проверь, что на фото видны голова и стопы. Зелёные точки показывают работу модели.","ok");report.push(`«${names[id]}»: основные ориентиры найдены.`);}
       }
-      resultBox.replaceChildren();
-      renderReportWizard(resultBox,photoMetrics,photoOk,report,measurements,sideSilhouette);
-      document.getElementById('intakeSection').hidden=true;
+      renderReview(report,photoOk,photoMetrics,measurements,sideSilhouette);
     }catch(e){
       console.error("MediaPipe initialization/detection error:",e);
-      resultBox.replaceChildren();add("h2","Не удалось загрузить MediaPipe",resultBox);
-      add("p","Проверь интернет, попробуй Chrome или обнови страницу. Иногда доступ к серверам модели блокируется сетью. Фотографии никуда не отправлены.",resultBox);
-      add("p","Техническая ошибка: "+String(e?.message||e).slice(0,240),resultBox);
-    }finally{updateButton();resultBox.scrollIntoView({behavior:"smooth",block:"start"});}
+      const root=document.getElementById('reviewSection');root.replaceChildren();root.hidden=false;
+      add('h2','Не удалось обработать фотографии',root);
+      paragraph(root,'Проверь интернет, попробуй Chrome или Safari и повтори попытку. Фотографии никуда не отправлены.');
+      paragraph(root,'Технические детали: '+String(e?.message||e).slice(0,240),'entry-help');
+      const back=add('button','← Вернуться к фотографиям',root);back.type='button';back.onclick=()=>{root.hidden=true;showIntake(1)};
+    }finally{updateButton();}
   });
 </script>
 </body>
