@@ -4,7 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="color-scheme" content="light" />
-  <title>Моя персональная карта спины · Версия 11</title>
+  <title>Postura Checkup | Персональная карта спины</title>
+  <meta name="description" content="Postura Checkup: персональная карта спины по фотографиям и ответам на вопросы. Наглядный разбор осанки и практические рекомендации." />
   <style>
     :root{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#1d232a;background:#f4f5f7}
     *{box-sizing:border-box} body{margin:0;padding:28px 16px 52px}main{max-width:780px;margin:auto}
@@ -250,7 +251,7 @@
 <div id="intakeSection" class="intake-shell">
   <div class="entry-progress"><div class="entry-progress-top"><span>ПОДГОТОВКА ТВОЕЙ КАРТЫ СПИНЫ</span><strong id="intakeCount">ШАГ 1 ИЗ 3</strong></div><div class="entry-progress-track"><div id="intakeBar"></div></div></div>
 <section class="intake-panel" data-intake="0">
-  <div class="welcome-head"><span class="welcome-kicker">ТВОЯ ПЕРСОНАЛЬНАЯ КАРТА СПИНЫ</span>
+  <div class="welcome-head"><span class="welcome-kicker">POSTURA CHECKUP · ТВОЯ ПЕРСОНАЛЬНАЯ КАРТА СПИНЫ</span>
   <h1>Узнай больше о своей спине и осанке</h1>
   <p class="welcome-lead">Мы внимательно посмотрим, как расположено твоё тело на фотографиях, и сопоставим это с тем, что ты расскажешь о своих ощущениях.</p></div>
   <div class="journey">
@@ -739,7 +740,7 @@
         shoulderGood?'На фотографиях спереди и сзади линия плеч близка к горизонтали.':'Положение плеч видно, но для числового сравнения уверенных данных недостаточно.';
 
     const toolbar=document.createElement('div');toolbar.className='report-toolbar';parent.append(toolbar);
-    add('strong','Твоя персональная карта спины',toolbar);
+    add('strong','Postura Checkup · Твоя персональная карта спины',toolbar);
     const edit=add('button','↩ Исправить фото или ответы',toolbar);edit.type='button';edit.onclick=()=>{parent.style.display='none';showIntake(2)};
     const wizard=document.createElement('div');wizard.className='report-wizard';parent.append(wizard);
     const top=document.createElement('div');top.className='wizard-top';wizard.append(top);
